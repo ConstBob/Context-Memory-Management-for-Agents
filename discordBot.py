@@ -3,6 +3,7 @@ import discord
 import datetime
 import os
 from dotenv import load_dotenv
+from agent import get_agent_message
 
 # Initialize the bot
 load_dotenv()
@@ -39,15 +40,7 @@ async def on_message(message: discord.Message):
             )
 
 
-# ---Calling Functions---
-# Dock it with the API
-def get_agent_message(username : str, inquiry : str, timestamp: datetime.datetime) -> str:
-    # API Implemented here--------------------------------------------------------
-    
-    # ======================================
-    reply_text = inquiry  # Expected to be strings
-    #-----------------------------------------------------------------------------
-    return reply_text
+
 
 # Start the bot
 bot.run(TOKEN)
