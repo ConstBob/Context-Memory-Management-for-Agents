@@ -3,10 +3,11 @@ import discord
 import datetime
 import os
 from dotenv import load_dotenv
+load_dotenv()
+
 from agent import get_agent_message
 
 # Initialize the bot
-load_dotenv()
 TOKEN =  os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()
