@@ -1,2 +1,4 @@
 google-genai
 tavily-python
+discord.py
+dotenv
