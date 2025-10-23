@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file
+
 import os, time, random
 import re, ast, math
 from tavily import TavilyClient
@@ -228,7 +231,7 @@ def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime)
     tavily_api_key = os.getenv("TAVILY_API_KEY")
     gemini_client = GeminiClient(
         api_key=api_key,
-        model_name="gemini-2.0-flash-exp",
+        model_name="gemini-2.0-flash",
         max_new_tokens=1024,
         limiter=RateLimiter(0.3),
         logger=logger,
