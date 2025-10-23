@@ -1,6 +1,23 @@
 # Context-Memory-Management-for-Agents
 
-## To be completed (for other parts)
+## Components
+
+### Core Agent (`agent.py`)
+- **GeminiClient**: Wrapper for Google's Gemini API with rate limiting and retry logic
+- **CalculatorTool**: Safe arithmetic expression evaluator for nutrition calculations
+- **Agent**: Main agent class with tool-calling capabilities (search + calculator)
+- **RateLimiter**: Prevents API rate limit violations
+- **SimpleLogger**: Structured logging for debugging and analysis
+
+### Discord Bot (`discordBot.py`)
+- Discord integration for real-time agent interaction
+- Responds to mentions in "general" channel
+- Logs user interactions with timestamps
+
+### Evaluation Framework
+- **`baseline_evaluation.py`**: Comprehensive baseline evaluation without context management
+- **`analyze_results.py`**: Analysis tools for evaluation results with trend analysis
+- **`grading_helpers.py`**: Helper functions for nutrition validation and user requirement checking
 
 ## Healthy Diet Agent Benchmark (JSONL) + Grading Helpers
 
@@ -30,6 +47,42 @@ Every test object has a `rotation_policy`. Enforce:
 All tests require both tools. Log tool usage (e.g., `["search","calculator"]`) and validate with `check_tool_usage`.
 
 ### Running
+
+#### Setup
+1. Install dependencies: `pip install -r requirements.txt`
+2. Create `.env` file with API keys:
+   ```
+   GEMINI_API_KEY=your_gemini_key
+   TAVILY_API_KEY=your_tavily_key
+   DISCORD_TOKEN=your_discord_token
+   ```
+
+#### Evaluation
+- **Baseline evaluation**: `python baseline_evaluation.py`
+- **Results analysis**: `python analyze_results.py`
+- **Discord bot**: `python discordBot.py`
+
+#### Benchmark Usage
 - Load JSONL line-by-line. For each test, run your agent over the `turns` and capture outputs.
 - Compare outputs against `ground_truth` using the helpers or your own evaluator.
 - Provide any `menu_history` and prior-session context your harness maintains to check variety.
+
+## Evaluation Metrics
+
+### Core Metrics
+- **Task Completion Rate**: Overall pass/fail rate across all tests
+- **Nutrition Validation**: Proper macro/micro nutrient calculations
+- **User Requirements**: Adherence to dietary restrictions and preferences
+- **Context Handling**: Memory dependency resolution
+
+### Advanced Metrics
+- **Variety Rules**: No repeats, protein rotation, ingredient diversity
+- **Timing Constraints**: Fasting windows, meal timing
+- **Tool Usage**: Calculator and search tool utilization
+- **Inter-session Memory**: Cross-session context retention
+
+### Analysis Features
+- Length-based performance analysis (short/medium/long conversations)
+- User-specific requirement tracking
+- Context weakness identification
+- Trend analysis across conversation types
