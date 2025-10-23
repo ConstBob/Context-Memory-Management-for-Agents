@@ -1,0 +1,78 @@
+{
+  "test_id": "bench_009",
+  "user_id": "u04",
+  "question": "Could you do a Japanese/Thai‑leaning pescatarian day—about 2200 kcals, solid protein (130+), and keep fiber decent?",
+  "response": "Understood! No tuna in the recipes or suggestions I give you.",
+  "all_responses": [
+    "Okay, here's a sample Japanese/Thai-leaning pescatarian meal plan at around 2200 calories with over 130g of protein and decent fiber.  Note that this is a sample and can/should be adjusted to your personal needs and preferences.\n\n**Important Considerations:**\n\n*   **Calorie and Macro Adjustments:** This is a template. Use a calorie tracking app to adjust portion sizes to meet your specific caloric and macro needs.\n*   **Fiber:**  Fiber content can vary greatly depending on the specific vegetables and brands of products you choose. Prioritize whole grains and high-fiber vegetables.\n*   **Flexibility:** Feel free to swap out meals and snacks based on your preferences and what's available. The goal is to maintain the calorie, protein, and fiber targets.\n*   **Hydration:** Drink plenty of water throughout the day.\n\n**Meal Plan:**\n\n**Breakfast (approx. 400 calories, 30g protein):**\n\n*   **Japanese Style Tofu Scramble:** 1 cup firm tofu, crumbled and stir-fried with 1/2 cup mixed vegetables (spinach, mushrooms, bell peppers), 1 tbsp soy sauce, 1 tsp sesame oil, and a sprinkle of nori flakes. (approx. 250 calories, 20g protein)\n*   **Edamame:** 1/2 cup steamed edamame (approx. 100 calories, 9g protein, good fiber)\n*   **Small orange:** (approx. 50 calories, 1g protein, good fiber)\n\n**Lunch (approx. 600 calories, 40g protein):**\n\n*   **Thai Green Curry with Shrimp and Brown Rice:** 1.5 cup Thai green curry with 4oz shrimp, bamboo shoots, bell peppers, and spinach, served over 1 cup cooked brown rice. (approx. 500 calories, 35g protein, good fiber from brown rice and vegetables)\n*   **Seaweed Salad:** 1/2 cup (approx. 100 calories, 5g protein)\n\n**Snack (approx. 200 calories, 15g protein):**\n\n*   **Greek Yogurt with Berries and Almonds:** 1 cup non-fat Greek yogurt topped with 1/2 cup mixed berries and 1/4 cup almonds. (approx. 200 calories, 15g protein, good fiber from berries and almonds)\n\n**Dinner (approx. 700 calories, 40g protein):**\n\n*   **Miso Glazed Salmon with Stir-Fried Vegetables:** 6oz Salmon fillet glazed with miso paste (mix miso paste with a little mirin and ginger), baked or pan-fried. (approx. 350 calories, 35g protein)\n*   **Stir-Fried Vegetables:** 2 cups stir-fried mixed vegetables (broccoli, carrots, snap peas) with 1 tbsp sesame oil and a splash of soy sauce. (approx. 200 calories, 5g protein, good fiber)\n*   **Quinoa:** 1/2 cup cooked quinoa (approx. 150 calories, 5g protein, good fiber)\n\n**Evening Snack (approx. 300 calories, 10g protein):**\n\n*   **Tofu Bibimbap:** Consider a Tofu Bibimbap, which can be made in an instant pot. ( Instagram post: [https://www.instagram.com/reel/DMgoNLASLIA/](https://www.instagram.com/reel/DMgoNLASLIA/) )\n\nThis meal plan provides a good balance of protein, carbohydrates, and fats, while incorporating Japanese and Thai flavors. Remember to adjust portion sizes and make substitutions as needed to meet your individual dietary requirements.",
+    "3 + 4 = 7",
+    "Understood! No tuna in the recipes or suggestions I give you."
+  ],
+  "conversation_context": "User: Could you do a Japanese/Thai‑leaning pescatarian day—about 2200 kcals, solid protein (130+), and keep fiber decent?\nAgent: Okay, here's a sample Japanese/Thai-leaning pescatarian meal plan at around 2200 calories with over 130g of protein and decent fiber.  Note that this is a sample and can/should be adjusted to your personal needs and preferences.\n\n**Important Considerations:**\n\n*   **Calorie and Macro Adjustments:** This is a template. Use a calorie tracking app to adjust portion sizes to meet your specific caloric and macro needs.\n*   **Fiber:**  Fiber content can vary greatly depending on the specific vegetables and brands of products you choose. Prioritize whole grains and high-fiber vegetables.\n*   **Flexibility:** Feel free to swap out meals and snacks based on your preferences and what's available. The goal is to maintain the calorie, protein, and fiber targets.\n*   **Hydration:** Drink plenty of water throughout the day.\n\n**Meal Plan:**\n\n**Breakfast (approx. 400 calories, 30g protein):**\n\n*   **Japanese Style Tofu Scramble:** 1 cup firm tofu, crumbled and stir-fried with 1/2 cup mixed vegetables (spinach, mushrooms, bell peppers), 1 tbsp soy sauce, 1 tsp sesame oil, and a sprinkle of nori flakes. (approx. 250 calories, 20g protein)\n*   **Edamame:** 1/2 cup steamed edamame (approx. 100 calories, 9g protein, good fiber)\n*   **Small orange:** (approx. 50 calories, 1g protein, good fiber)\n\n**Lunch (approx. 600 calories, 40g protein):**\n\n*   **Thai Green Curry with Shrimp and Brown Rice:** 1.5 cup Thai green curry with 4oz shrimp, bamboo shoots, bell peppers, and spinach, served over 1 cup cooked brown rice. (approx. 500 calories, 35g protein, good fiber from brown rice and vegetables)\n*   **Seaweed Salad:** 1/2 cup (approx. 100 calories, 5g protein)\n\n**Snack (approx. 200 calories, 15g protein):**\n\n*   **Greek Yogurt with Berries and Almonds:** 1 cup non-fat Greek yogurt topped with 1/2 cup mixed berries and 1/4 cup almonds. (approx. 200 calories, 15g protein, good fiber from berries and almonds)\n\n**Dinner (approx. 700 calories, 40g protein):**\n\n*   **Miso Glazed Salmon with Stir-Fried Vegetables:** 6oz Salmon fillet glazed with miso paste (mix miso paste with a little mirin and ginger), baked or pan-fried. (approx. 350 calories, 35g protein)\n*   **Stir-Fried Vegetables:** 2 cups stir-fried mixed vegetables (broccoli, carrots, snap peas) with 1 tbsp sesame oil and a splash of soy sauce. (approx. 200 calories, 5g protein, good fiber)\n*   **Quinoa:** 1/2 cup cooked quinoa (approx. 150 calories, 5g protein, good fiber)\n\n**Evening Snack (approx. 300 calories, 10g protein):**\n\n*   **Tofu Bibimbap:** Consider a Tofu Bibimbap, which can be made in an instant pot. ( Instagram post: [https://www.instagram.com/reel/DMgoNLASLIA/](https://www.instagram.com/reel/DMgoNLASLIA/) )\n\nThis meal plan provides a good balance of protein, carbohydrates, and fats, while incorporating Japanese and Thai flavors. Remember to adjust portion sizes and make substitutions as needed to meet your individual dietary requirements.\nUser: Use US units.\nAgent: 3 + 4 = 7\nUser: Oh—and I don’t eat tuna.\nAgent: Understood! No tuna in the recipes or suggestions I give you.\n",
+  "passed": false,
+  "nutrition_valid": false,
+  "nutrition_numbers": {},
+  "user_requirements": {
+    "pescatarian": false,
+    "no_tuna": false,
+    "us_units": false,
+    "japanese_thai": false
+  },
+  "user_req_score": 0.0,
+  "context_dependencies": {
+    "ambiguous_handling": false,
+    "variety_awareness": false
+  },
+  "context_score": 0.0,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "Total 2090–2310 kcal; protein ≥130 g; fiber ≥30 g; pescatarian; no tuna; US units.",
+    "must_use": [
+      "calculator",
+      "search for any new packaged sauces or noodles to verify nutrition (e.g., rice noodles, miso)"
+    ],
+    "must_not": [
+      "tuna",
+      "repeat dishes in future sessions"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "pescatarian",
+      "prefers Japanese/Thai",
+      "US units",
+      "fiber ≥30 g"
+    ],
+    "inter_session": []
+  },
+  "length": "medium",
+  "total_turns": 6,
+  "evaluation_timestamp": "2025-10-22T16:52:39.598283",
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": true
+  },
+  "advanced_score": 0.875,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": true,
+  "meal_times": [],
+  "proposed_dishes": [],
+  "primary_proteins": [
+    "tuna"
+  ],
+  "ingredients": [],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": []
+}

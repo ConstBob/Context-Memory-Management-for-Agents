@@ -1,0 +1,102 @@
+{
+  "test_id": "bench_002",
+  "user_id": "u02",
+  "question": "Can you do me a veg day at my usual calories and protein, inside my 12–8 window? No cheese.",
+  "response": "Here are some metric conversion tools that might be helpful:\n\n*   **Australian Government Metric Conversion Tool:** This tool covers area, length, mass, power, temperature, pressure, velocity, and volume.  ([https://www.industry.gov.au/publications/metric-conversion-tool](https://www.industry.gov.au/publications/metric-conversion-tool))\n*   **New York Times Cooking Metric Conversion:** If you're a home cook, New York Times Cooking now lets you view ingredient measurements in grams and liters. ([https://help.nytimes.com/360011047512-New-York-Times-Cooking/30493300086164-Metric-Conversion](https://help.nytimes.com/360011047512-New-York-Times-Cooking/30493300086164-Metric-Conversion))\n*   **Metric-Conversions.org:** Offers calculators, tables, and formulas for temperature, length, area, volume, and weight. ([https://www.metric-conversions.org/](https://www.metric-conversions.org/))",
+  "all_responses": [
+    "Okay, I can definitely help you plan a vegetarian day within your 12-8 eating window, while maintaining your usual calorie and protein targets and excluding cheese.\n\nTo give you a personalized meal plan, I need a bit more information:\n\n1.  **What are your usual daily calorie and protein targets?** Please provide the number of calories and grams of protein you aim for each day.\n2.  **Do you have any other dietary restrictions or preferences** (e.g., specific vegetables you dislike, gluten-free, etc.)?\n3.  **How many meals/snacks do you typically eat during your eating window?** This will help me distribute the calories and protein appropriately.\n\nOnce I have this information, I can create a sample vegetarian meal plan for you.",
+    "Here are some metric conversion tools that might be helpful:\n\n*   **Australian Government Metric Conversion Tool:** This tool covers area, length, mass, power, temperature, pressure, velocity, and volume.  ([https://www.industry.gov.au/publications/metric-conversion-tool](https://www.industry.gov.au/publications/metric-conversion-tool))\n*   **New York Times Cooking Metric Conversion:** If you're a home cook, New York Times Cooking now lets you view ingredient measurements in grams and liters. ([https://help.nytimes.com/360011047512-New-York-Times-Cooking/30493300086164-Metric-Conversion](https://help.nytimes.com/360011047512-New-York-Times-Cooking/30493300086164-Metric-Conversion))\n*   **Metric-Conversions.org:** Offers calculators, tables, and formulas for temperature, length, area, volume, and weight. ([https://www.metric-conversions.org/](https://www.metric-conversions.org/))"
+  ],
+  "conversation_context": "User: Can you do me a veg day at my usual calories and protein, inside my 12–8 window? No cheese.\nAgent: Okay, I can definitely help you plan a vegetarian day within your 12-8 eating window, while maintaining your usual calorie and protein targets and excluding cheese.\n\nTo give you a personalized meal plan, I need a bit more information:\n\n1.  **What are your usual daily calorie and protein targets?** Please provide the number of calories and grams of protein you aim for each day.\n2.  **Do you have any other dietary restrictions or preferences** (e.g., specific vegetables you dislike, gluten-free, etc.)?\n3.  **How many meals/snacks do you typically eat during your eating window?** This will help me distribute the calories and protein appropriately.\n\nOnce I have this information, I can create a sample vegetarian meal plan for you.\nUser: Keep it metric and please don’t repeat anything from earlier this week.\nAgent: Here are some metric conversion tools that might be helpful:\n\n*   **Australian Government Metric Conversion Tool:** This tool covers area, length, mass, power, temperature, pressure, velocity, and volume.  ([https://www.industry.gov.au/publications/metric-conversion-tool](https://www.industry.gov.au/publications/metric-conversion-tool))\n*   **New York Times Cooking Metric Conversion:** If you're a home cook, New York Times Cooking now lets you view ingredient measurements in grams and liters. ([https://help.nytimes.com/360011047512-New-York-Times-Cooking/30493300086164-Metric-Conversion](https://help.nytimes.com/360011047512-New-York-Times-Cooking/30493300086164-Metric-Conversion))\n*   **Metric-Conversions.org:** Offers calculators, tables, and formulas for temperature, length, area, volume, and weight. ([https://www.metric-conversions.org/](https://www.metric-conversions.org/))\n",
+  "passed": false,
+  "nutrition_valid": false,
+  "nutrition_numbers": {},
+  "user_requirements": {
+    "vegetarian": true,
+    "lactose_free": true,
+    "metric_units": true,
+    "fasting_window": false
+  },
+  "user_req_score": 0.75,
+  "context_dependencies": {
+    "inter_session_recall": false,
+    "ambiguous_handling": true,
+    "variety_awareness": false
+  },
+  "context_score": 0.3333333333333333,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "3 meals (12:00, ~15:30, ~19:30). Total 1520–1680 kcal; protein ≥110 g; lactose‑free; vegetarian; metric.",
+    "must_use": [
+      "calculator for day total and per‑meal macros",
+      "search for nutrition of at least one new ingredient/recipe"
+    ],
+    "must_not": [
+      "cheese/dairy",
+      "dishes already in menu_history",
+      "meals outside 12–20 window"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "vegetarian",
+      "lactose intolerant",
+      "16:8 fasting 12:00–20:00"
+    ],
+    "inter_session": [
+      "from u02_s1_med3day (bench_007): 1600 kcal, protein ≥110 g, metric units, microwave + rice cooker only",
+      "menu_history for this week"
+    ]
+  },
+  "length": "short",
+  "total_turns": 4,
+  "evaluation_timestamp": "2025-10-22T16:50:25.080603",
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": true
+  },
+  "advanced_score": 0.875,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": true,
+  "meal_times": [],
+  "proposed_dishes": [
+    "Australian Government Metric Conversion Tool:",
+    "New York Times Cooking Metric Conversion:",
+    "Metric-Conversions.org:",
+    "conversion",
+    "tool](https://www.industry.gov.au/publications/metric",
+    "conversion",
+    "tool))",
+    "New",
+    "York",
+    "Times",
+    "Cooking/30493300086164",
+    "Metric",
+    "Conversion](https://help.nytimes.com/360011047512",
+    "New",
+    "York",
+    "Times",
+    "Cooking/30493300086164",
+    "Metric",
+    "Conversion))",
+    "Conversions.org:** Offers calculators, tables, and formulas for temperature, length, area, volume, and weight. ([https://www.metric",
+    "conversions.org/](https://www.metric",
+    "conversions.org/))"
+  ],
+  "primary_proteins": [],
+  "ingredients": [],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": []
+}

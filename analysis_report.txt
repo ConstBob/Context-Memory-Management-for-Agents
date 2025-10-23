@@ -1,0 +1,188 @@
+
+================================================================================
+COMPREHENSIVE EVALUATION SUMMARY
+================================================================================
+
+OVERALL STATISTICS:
+  Total Tests: 15
+  Passed Tests: 0 (0.0%)
+  Nutrition Valid: 0 (0.0%)
+
+AVERAGE SCORES:
+  User Requirements: 0.322
+  Context Handling: 0.111
+  Advanced Evaluation: 0.858
+
+============================================================
+CONVERSATION LENGTH ANALYSIS
+============================================================
+
+SHORT CONVERSATIONS (5 tests):
+  Count: 5
+  Passed Rate: 0.00%
+  Nutrition Valid Rate: 0.00%
+  Avg User Req Score: 0.483
+  Avg Context Score: 0.200
+  Avg Advanced Score: 0.825
+  Avg Total Turns: 2.8
+
+  Advanced Evaluation Rates:
+    no_repeats: 100.00%
+    protein_rotation: 100.00%
+    fasting_window: 100.00%
+    netcarb_caps: 100.00%
+    sodium: 100.00%
+    ingredient_diversity: 100.00%
+    enhanced_nutrition: 60.00%
+    tool_usage: 0.00%
+
+MEDIUM CONVERSATIONS (5 tests):
+  Count: 5
+  Passed Rate: 0.00%
+  Nutrition Valid Rate: 0.00%
+  Avg User Req Score: 0.267
+  Avg Context Score: 0.000
+  Avg Advanced Score: 0.875
+  Avg Total Turns: 6.0
+
+  Advanced Evaluation Rates:
+    no_repeats: 100.00%
+    protein_rotation: 100.00%
+    fasting_window: 100.00%
+    netcarb_caps: 100.00%
+    sodium: 100.00%
+    ingredient_diversity: 100.00%
+    enhanced_nutrition: 100.00%
+    tool_usage: 0.00%
+
+LONG CONVERSATIONS (5 tests):
+  Count: 5
+  Passed Rate: 0.00%
+  Nutrition Valid Rate: 0.00%
+  Avg User Req Score: 0.217
+  Avg Context Score: 0.133
+  Avg Advanced Score: 0.875
+  Avg Total Turns: 11.2
+
+  Advanced Evaluation Rates:
+    no_repeats: 100.00%
+    protein_rotation: 100.00%
+    fasting_window: 100.00%
+    netcarb_caps: 100.00%
+    sodium: 100.00%
+    ingredient_diversity: 100.00%
+    enhanced_nutrition: 100.00%
+    tool_usage: 0.00%
+
+============================================================
+USER REQUIREMENTS vs CONTEXT SCORES TREND ANALYSIS
+============================================================
+
+SHORT:
+  User Req Score: 0.483 ± 0.305
+  Context Score: 0.200 ± 0.163
+  Sample size: 5
+
+MEDIUM:
+  User Req Score: 0.267 ± 0.162
+  Context Score: 0.000 ± 0.000
+  Sample size: 5
+
+LONG:
+  User Req Score: 0.217 ± 0.113
+  Context Score: 0.133 ± 0.163
+  Sample size: 5
+
+============================================================
+ADVANCED METRICS TREND ANALYSIS
+============================================================
+
+No Repeats:
+  short: 100.00% (5/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Protein Rotation:
+  short: 100.00% (5/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Fasting Window:
+  short: 100.00% (5/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Netcarb Caps:
+  short: 100.00% (5/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Sodium:
+  short: 100.00% (5/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Ingredient Diversity:
+  short: 100.00% (5/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Enhanced Nutrition:
+  short: 60.00% (3/5)
+  medium: 100.00% (5/5)
+  long: 100.00% (5/5)
+
+Tool Usage:
+  short: 0.00% (0/5)
+  medium: 0.00% (0/5)
+  long: 0.00% (0/5)
+
+============================================================
+CONTEXT WEAKNESSES IDENTIFICATION
+============================================================
+
+Tests with low context scores (< 0.5): 15
+
+  bench_001 (short):
+    Context Score: 0.000
+    User Req Score: 0.667
+    Question: Got any post‑workout snacks around 300 cals with at least 25 g of protein? Keep it peanut‑free and n...
+    Context Dependencies: {'inter_session_recall': False, 'ambiguous_handling': False, 'variety_awareness': False}
+
+  bench_002 (short):
+    Context Score: 0.333
+    User Req Score: 0.750
+    Question: Can you do me a veg day at my usual calories and protein, inside my 12–8 window? No cheese....
+    Context Dependencies: {'inter_session_recall': False, 'ambiguous_handling': True, 'variety_awareness': False}
+
+  bench_003 (short):
+    Context Score: 0.333
+    User Req Score: 0.250
+    Question: I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes...
+    Context Dependencies: {'inter_session_recall': False, 'ambiguous_handling': True, 'variety_awareness': False}
+
+  bench_004 (short):
+    Context Score: 0.333
+    User Req Score: 0.750
+    Question: Tonight, can we swap dinner for something grillable and halal? Roughly 600 cals, 40+ protein, and ke...
+    Context Dependencies: {'inter_session_recall': False, 'ambiguous_handling': True, 'variety_awareness': False}
+
+  bench_005 (short):
+    Context Score: 0.000
+    User Req Score: 0.000
+    Question: Quick breakfast around 400 cals with 30+ protein, no peanuts, and not oatmeal. US units....
+    Context Dependencies: {'inter_session_recall': False, 'ambiguous_handling': False, 'variety_awareness': False}
+
+Tests with inter-session dependencies: 11
+
+  bench_001 (short):
+    Context Score: 0.000
+    Inter-session deps: ['diet_profile from u01_s1_dayplan (bench_006): 1800 kcal, protein ≥140g, fiber ≥30g', 'menu_history days used in u01_s1']
+
+  bench_002 (short):
+    Context Score: 0.333
+    Inter-session deps: ['from u02_s1_med3day (bench_007): 1600 kcal, protein ≥110 g, metric units, microwave + rice cooker only', 'menu_history for this week']
+
+  bench_003 (short):
+    Context Score: 0.333
+    Inter-session deps: ['from u04_s1_med_day (bench_009): 2200 kcal target, protein ≥130 g, fiber ≥30 g, Japanese/Thai preference', 'menu_history of last 3 days']
