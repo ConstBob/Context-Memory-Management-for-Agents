@@ -74,12 +74,6 @@ A comprehensive framework with context and memory management capabilities in AI 
 |  └─────────────────────────────────────┘                                              |
 |                                                                                       |
 └───────────────────────────────────────────────────────────────────────────────────────┘
-
-
-
-
-
-
 ```
 
 ## Components
