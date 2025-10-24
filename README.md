@@ -36,11 +36,50 @@ A comprehensive framework with context and memory management capabilities in AI 
 ├─────────────────────────────────────────────────────────────────┤
 │                        Data Flow                                │
 │                                                                 │
-│  User Input → Discord Bot → Core Agent → Tools → Response       │
+│  User Input → Discord Bot → Core Agent → Response               │
 │       ↓                                                         │
 │  Benchmark → Evaluation → Analysis → Reports                    │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------------------------+
+|                                Core Agent Data Flow                                   |
+|---------------------------------------------------------------------------------------|
+|                                                                                       |
+|  +--------------------------------------+                                             |
+|  | (1) Input                            |                                             |
+|  |--------------------------------------|                                             |
+|  | - Agent.chat_with_tools()            |                                             |
+|  +--------------------------------------+                                             |
+|                                                                                       |
+|                                                                                       |
+|  +-------------------------------------+            +------------------------------+  |
+|  | (2) Tool Planning Loop              |            | (3) Tool Execution           |  |
+|  |-------------------------------------| tool call  |------------------------------|  |
+|  | - Agent.determine_if_calc_needed()  |  request   | - CalculatorTool.calculate() |  |
+|  | - Agent.refine_calc_expression()    |----------->| - TavilyClient.search()      |  |
+|  | - Agent.determine_if_search_needed()|            | - RateLimiter.acquire()      |  |
+|  | - Agent.refine_search_term()        |            | - _retry_with_backoff()      |  |
+|  +-------------------------------------+            +----------------------------- +  |
+|      |         ^                                                             |        |
+|      |         |  tool result & updated history                              |        |
+|      |         +-------------------------------------------------------------+        |
+|      |                                                                                |
+|      | no more tool calls needed                                                      |
+|      v                                                                                |
+|  +-------------------------------------+                                              |
+|  | (4) Generate Final Answer & Output  |                                              |
+|  |-------------------------------------|                                              |
+|  | - Agent.generate_response()         |                                              |
+|  | - GeminiClient.infer()              |                                              |
+|  +-------------------------------------+                                              |
+|                                                                                       |
++---------------------------------------------------------------------------------------+
+
+
+
+
+
+
 ```
 
 ## Components

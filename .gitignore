@@ -1,3 +1,5 @@
 .env
 .CSE291A_Project/
 _pycache_/
+logs/
+*.pem
