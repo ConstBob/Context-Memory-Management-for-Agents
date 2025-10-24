@@ -1,5 +1,48 @@
 # Context-Memory-Management-for-Agents
 
+A comprehensive framework with context and memory management capabilities in AI agents using a healthy diet planning benchmark.
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                Context-Memory-Management Framework              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌──────────────┐ │
+│  │   Discord Bot   │    │   Core Agent    │    │  Evaluation  │ │
+│  │   (discordBot)  │    │    (agent.py)   │    │  Framework   │ │
+│  │                 │    │                 │    │              │ │
+│  │ • User Input    │───►│ • GeminiClient  │◄───│ • Baseline   │ │
+│  │ • Mention       │    │ • Calculator    │    │   Evaluation │ │
+│  │ • Logging       │    │ • Web Search    │    │ • Analysis   │ │
+│  │                 │    │ • Rate Limiting │    │ • Reporting  │ │
+│  └─────────────────┘    └─────────────────┘    └──────────────┘ │
+│           │                     │ │                       ▲     │
+│           │                     │ │                       │     │
+│           │ ┌───────────────────┘ │                       │     │
+│           │ │                     │                       │     │
+│           │ ▼                     ▼                       │     │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌──────────────┐ │
+│  │   External      │    │   Tools &       │    │  Benchmark   │ │
+│  │   APIs          │    │   Helpers       │    │  Dataset     │ │
+│  │                 │    │                 │    │              │ │
+│  │ • Gemini API    │◄───│ • Calculator    │◄───│ • 15 Tests   │ │
+│  │ • Tavily Search │    │ • Search Tool   │    │ • 4 Users    │ │
+│  │ • Discord API   │    │ • Grading Help  │    │ • Multi-turn │ │
+│  │                 │    │ • Validation    │    │ • Memory Dep │ │
+│  └─────────────────┘    └─────────────────┘    └──────────────┘ │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│                        Data Flow                                │
+│                                                                 │
+│  User Input → Discord Bot → Core Agent → Tools → Response       │
+│       ↓                                                         │
+│  Benchmark → Evaluation → Analysis → Reports                    │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Components
 
 ### Core Agent (`agent.py`)
