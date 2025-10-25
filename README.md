@@ -81,7 +81,7 @@ A comprehensive framework with context and memory management capabilities in AI 
 ### Core Agent (`agent.py`)
 - **GeminiClient**: Wrapper for Google's Gemini API with rate limiting and retry logic
 - **CalculatorTool**: Safe arithmetic expression evaluator for nutrition calculations
-- **Agent**: Main agent class with tool-calling capabilities (search + calculator)
+- **Agent**: Main agent class with tool-calling capabilities (search + calculator). Note that agents in the 1 phase can only perform operations based on the current query, without any ability to know about previous queries.
 - **RateLimiter**: Prevents API rate limit violations
 - **SimpleLogger**: Structured logging for debugging and analysis
 

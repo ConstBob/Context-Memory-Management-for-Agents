@@ -3,3 +3,5 @@
 _pycache_/
 logs/
 *.pem
+evaluation_results/
+evaluation_logs/
