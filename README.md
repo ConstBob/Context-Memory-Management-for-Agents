@@ -132,8 +132,10 @@ All tests require both tools. Log tool usage (e.g., `["search","calculator"]`) a
    TAVILY_API_KEY=your_tavily_key
    DISCORD_TOKEN=your_discord_token
    ```
-3. For quick access to our deployed instance, join our discord channel https://discord.gg/Ur7dS9Fut2 and @ the bot in #general
+3. For quick access to our deployed instance, join our discord channel https://discord.gg/Ur7dS9Fut2 and @ the bot in `#general`
+   
    ![Query Example](tutorial/example.jpg)
+   
 #### Evaluation
 - **Baseline evaluation**: `python baseline_evaluation.py`
 - **Results analysis**: `python analyze_results.py`
