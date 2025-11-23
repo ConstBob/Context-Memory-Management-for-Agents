@@ -1,4 +1,5 @@
 google-genai
 tavily-python
 discord.py
-dotenv
+python-dotenv
+requests

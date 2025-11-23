@@ -81,9 +81,17 @@ A comprehensive framework with context and memory management capabilities in AI 
 ### Core Agent (`agent.py`)
 - **GeminiClient**: Wrapper for Google's Gemini API with rate limiting and retry logic
 - **CalculatorTool**: Safe arithmetic expression evaluator for nutrition calculations
-- **Agent**: Main agent class with tool-calling capabilities (search + calculator). Note that agents in the 1 phase can only perform operations based on the current query, without any ability to know about previous queries.
+- **Agent**: Main agent class with tool-calling capabilities (search + calculator) and context-aware response generation
 - **RateLimiter**: Prevents API rate limit violations
 - **SimpleLogger**: Structured logging for debugging and analysis
+
+### Hybrid Memory System (`memory_manager.py`, `menu_extractor.py`)
+- **HybridMemoryManager**: Manages user profiles, conversation history, and menu tracking with SQLite persistence
+- **UserProfile**: Structured dataclass for user preferences (calories, allergies, equipment, etc.)
+- **MenuExtractor**: Extracts meals from responses and enforces variety rules
+- **Database Schema**: Three tables (user_profiles, conversation_history, menu_history) with indexed queries
+- **Context Building**: Intelligently combines profile + recent conversation + menu history for LLM prompts
+- See [MEMORY_SYSTEM.md](MEMORY_SYSTEM.md) for detailed documentation
 
 ### Discord Bot (`discordBot.py`)
 - Discord integration for real-time agent interaction
@@ -126,20 +134,37 @@ All tests require both tools. Log tool usage (e.g., `["search","calculator"]`) a
 
 #### Setup
 1. Install dependencies: `pip install -r requirements.txt`
-2. Create `.env` file with API keys:
-   ```
+2. Create `.env` file with API keys (see `.env.example` for full options):
+
+   **Option A: Using Gemini (default)**
+   ```bash
+   LLM_PROVIDER=gemini
    GEMINI_API_KEY=your_gemini_key
    TAVILY_API_KEY=your_tavily_key
    DISCORD_TOKEN=your_discord_token
    ```
+
+   **Option B: Using OpenRouter (supports Claude, GPT-4, Llama, etc.)**
+   ```bash
+   LLM_PROVIDER=openrouter
+   OPENROUTER_API_KEY=your_openrouter_key
+   OPENROUTER_MODEL=anthropic/claude-3.5-sonnet
+   TAVILY_API_KEY=your_tavily_key
+   DISCORD_TOKEN=your_discord_token
+   ```
+
+   Get OpenRouter API key: https://openrouter.ai/keys
+   Available models: https://openrouter.ai/models
+
 3. For quick access to our deployed instance, join our discord channel https://discord.gg/Ur7dS9Fut2 and @ the bot in `#general`
-   
+
    ![Query Example](tutorial/example.jpg)
-   
+
 #### Evaluation
 - **Baseline evaluation**: `python baseline_evaluation.py`
 - **Results analysis**: `python analyze_results.py`
-- **Discord bot**: `python discordBot.py`
+- **Discord bot with memory**: `python discordBot.py`
+- **Test memory system**: `python test_memory_system.py`
 
 #### Benchmark Usage
 - Load JSONL line-by-line. For each test, run your agent over the `turns` and capture outputs.

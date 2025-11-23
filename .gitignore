@@ -1,7 +1,20 @@
+# Environment variables and secrets
 .env
-.CSE291A_Project/
+*.env
+!.env.example
+__pycache__/
 _pycache_/
+*.py[cod]
+*$py.class
+data/
+*.db
+*.sqlite
+*.sqlite3
 logs/
-*.pem
+*.log
 evaluation_results/
 evaluation_logs/
+.vscode/
+.idea/
+*~
+.DS_Store

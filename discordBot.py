@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from agent import get_agent_message
+from memory_manager import HybridMemoryManager
 
 # Initialize the bot
 TOKEN =  os.getenv("DISCORD_TOKEN")
@@ -16,6 +17,9 @@ intents.guilds = True
 
 bot = discord.Client(intents=intents)
 
+# Initialize memory manager (shared across all requests)
+memory_manager = HybridMemoryManager(db_path="data/users.db")
+
 # Bot Behaviors
 @bot.event
 async def on_ready():
@@ -24,7 +28,7 @@ async def on_ready():
 @bot.event
 async def on_message(message: discord.Message):
 
-    if message.author == bot.user: # Ignore the message from bot itself 
+    if message.author == bot.user: # Ignore the message from bot itself
         return
 
     if message.channel.name.lower() == "general":
@@ -34,7 +38,9 @@ async def on_message(message: discord.Message):
             time_sent = message.created_at
 
             print(f"[{time_sent}] {sender.name}: {content}")
-            reply_text = get_agent_message(sender.name, content, time_sent)
+
+            # Get response with memory manager for context
+            reply_text = get_agent_message(sender.name, content, time_sent, memory_manager=memory_manager)
 
             await message.channel.send(
                 f"{sender.mention} {reply_text}"
