@@ -2,11 +2,11 @@
   "test_id": "bench_003",
   "user_id": "u04",
   "question": "I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.",
-  "response": "Okay, here's a fresh pescatarian meal plan for you, avoiding tuna and dishes from this week:\n\n*   **Breakfast:** Smoked Salmon with pesto. (https://pescetarian.kitchen/)\n*   **Lunch:** Hot n' Crunchy Fish Sandwiches (https://dishonfish.com/11-new-seafood-recipes-pescatarian-diet/)\n*   **Dinner:** One-Pan Fish Stew (https://www.olivemagazine.com/guides/pescatarian-recipes/)",
+  "response": "I notice this is our first conversation, so I don't have access to your previous targets or meal history. To create an appropriate meal plan, I'll need:\n\n1. Your daily calorie target\n2. Any specific macro goals (protein, carbs, fat)\n3. Any additional dietary restrictions beyond:\n   - Pescatarian diet (fish but no other meat)\n   - No tuna\n4. Any other preferences (food allergies, ingredients to avoid, etc.)\n\nOnce you provide these details, I can create a personalized meal plan that meets your specific needs and preferences.",
   "all_responses": [
-    "Okay, here's a fresh pescatarian meal plan for you, avoiding tuna and dishes from this week:\n\n*   **Breakfast:** Smoked Salmon with pesto. (https://pescetarian.kitchen/)\n*   **Lunch:** Hot n' Crunchy Fish Sandwiches (https://dishonfish.com/11-new-seafood-recipes-pescatarian-diet/)\n*   **Dinner:** One-Pan Fish Stew (https://www.olivemagazine.com/guides/pescatarian-recipes/)"
+    "I notice this is our first conversation, so I don't have access to your previous targets or meal history. To create an appropriate meal plan, I'll need:\n\n1. Your daily calorie target\n2. Any specific macro goals (protein, carbs, fat)\n3. Any additional dietary restrictions beyond:\n   - Pescatarian diet (fish but no other meat)\n   - No tuna\n4. Any other preferences (food allergies, ingredients to avoid, etc.)\n\nOnce you provide these details, I can create a personalized meal plan that meets your specific needs and preferences."
   ],
-  "conversation_context": "User: I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.\nAgent: Okay, here's a fresh pescatarian meal plan for you, avoiding tuna and dishes from this week:\n\n*   **Breakfast:** Smoked Salmon with pesto. (https://pescetarian.kitchen/)\n*   **Lunch:** Hot n' Crunchy Fish Sandwiches (https://dishonfish.com/11-new-seafood-recipes-pescatarian-diet/)\n*   **Dinner:** One-Pan Fish Stew (https://www.olivemagazine.com/guides/pescatarian-recipes/)\n",
+  "conversation_context": "User: I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.\nAgent: I notice this is our first conversation, so I don't have access to your previous targets or meal history. To create an appropriate meal plan, I'll need:\n\n1. Your daily calorie target\n2. Any specific macro goals (protein, carbs, fat)\n3. Any additional dietary restrictions beyond:\n   - Pescatarian diet (fish but no other meat)\n   - No tuna\n4. Any other preferences (food allergies, ingredients to avoid, etc.)\n\nOnce you provide these details, I can create a personalized meal plan that meets your specific needs and preferences.\n",
   "passed": false,
   "nutrition_valid": false,
   "nutrition_numbers": {},
@@ -18,11 +18,11 @@
   },
   "user_req_score": 0.25,
   "context_dependencies": {
-    "inter_session_recall": false,
+    "inter_session_recall": true,
     "ambiguous_handling": true,
     "variety_awareness": false
   },
-  "context_score": 0.3333333333333333,
+  "context_score": 0.6666666666666666,
   "tool_usage_valid": false,
   "ground_truth": {
     "final_answer_criteria": "Total 2090–2310 kcal; protein ≥130 g; pescatarian; excludes tuna; no repeats vs. menu_history.",
@@ -47,7 +47,7 @@
   },
   "length": "short",
   "total_turns": 2,
-  "evaluation_timestamp": "2025-10-22T16:50:37.210460",
+  "evaluation_timestamp": "2025-12-01T16:44:48.996837",
   "advanced_scores": {
     "no_repeats": true,
     "protein_rotation": true,
@@ -68,20 +68,15 @@
   "enhanced_nutrition_valid": true,
   "meal_times": [],
   "proposed_dishes": [
-    "Breakfast:",
-    "Lunch:",
-    "Dinner:",
-    "new",
-    "seafood",
-    "recipes",
-    "pescatarian",
-    "diet/)",
-    "Pan Fish Stew (https://www.olivemagazine.com/guides/pescatarian",
-    "recipes/)"
+    "Pescatarian diet (fish but no other meat)",
+    "No tuna",
+    "1. Your daily calorie target",
+    "2. Any specific macro goals (protein, carbs, fat)",
+    "3. Any additional dietary restrictions beyond:",
+    "4. Any other preferences (food allergies, ingredients to avoid, etc.)"
   ],
   "primary_proteins": [
     "fish",
-    "salmon",
     "tuna"
   ],
   "ingredients": [],

@@ -93,6 +93,14 @@ A comprehensive framework with context and memory management capabilities in AI 
 - **Context Building**: Intelligently combines profile + recent conversation + menu history for LLM prompts
 - See [MEMORY_SYSTEM.md](MEMORY_SYSTEM.md) for detailed documentation
 
+### RAG System (`rag_system.py`) - Optional Enhancement
+- **RAGSystem**: Semantic search over conversation and menu history using BGE embeddings (BAAI/bge-small-en-v1.5)
+- **BackgroundIndexer**: Asynchronous indexing in background thread to avoid blocking user requests
+- **EnhancedMemoryManager**: Combines traditional memory with semantic search for smarter context retrieval
+- **Benefits**: Find relevant past conversations by meaning, retrieve similar dishes semantically, reduce LLM context size
+- **Performance**: ~2ms overhead per query, runs locally with no API costs
+- Enable with `USE_RAG=true` in `.env`
+
 ### Discord Bot (`discordBot.py`)
 - Discord integration for real-time agent interaction
 - Responds to mentions in "general" channel
@@ -156,7 +164,22 @@ All tests require both tools. Log tool usage (e.g., `["search","calculator"]`) a
    Get OpenRouter API key: https://openrouter.ai/keys
    Available models: https://openrouter.ai/models
 
-3. For quick access to our deployed instance, join our discord channel https://discord.gg/Ur7dS9Fut2 and @ the bot in `#general`
+3. **Optional: Enable RAG for semantic search**
+   ```bash
+   # Add to .env
+   USE_RAG=true
+
+   # Install BGE embeddings
+   pip install sentence-transformers
+   ```
+
+   **What RAG adds:**
+   - Semantic search: "breakfast like before" finds similar breakfasts, not just recent ones
+   - Background indexing: No blocking - indexing happens in separate thread
+   - Smart context: Only includes most relevant past conversations/meals
+   - Local & free: Runs on your machine, no API costs
+
+4. For quick access to our deployed instance, join our discord channel https://discord.gg/Ur7dS9Fut2 and @ the bot in `#general`
 
    ![Query Example](tutorial/example.jpg)
 

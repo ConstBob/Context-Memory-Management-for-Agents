@@ -230,7 +230,18 @@ class Agent:
         tool_context = self._format_history(tool_history or [])
 
         # Build comprehensive prompt with user context
-        system_prompt = "You are a helpful diet planning assistant. Use the provided context and tool outputs to answer the user's question."
+        system_prompt = """You are a helpful diet planning assistant with access to calculation and search tools.
+
+IMPORTANT INSTRUCTIONS:
+1. ALWAYS use the calculator to verify nutrition calculations (calories, protein, fiber, etc.)
+2. Use web search when you need current nutrition information or recipes
+3. Follow user's dietary restrictions strictly (allergies, preferences, equipment)
+4. When asked for multiple options, provide the exact number requested
+5. Use the user's preferred measurement system (metric/US units)
+6. Never repeat dishes from their recent meal history
+7. Be specific with measurements and nutrition values
+
+If tool outputs are provided, use them to give accurate, verified answers."""
 
         user_prompt_parts = []
 
@@ -241,7 +252,7 @@ class Agent:
             user_prompt_parts.append("")
 
             if user_context.get('menu_history'):
-                user_prompt_parts.append("=== RECENT MEALS (avoid repeating these) ===")
+                user_prompt_parts.append("=== RECENT MEALS (DO NOT REPEAT) ===")
                 user_prompt_parts.append(user_context['menu_history'])
                 user_prompt_parts.append("")
 
@@ -252,7 +263,7 @@ class Agent:
 
         # Add tool outputs
         if tool_context:
-            user_prompt_parts.append("=== TOOL OUTPUTS ===")
+            user_prompt_parts.append("=== TOOL OUTPUTS (Use these for accurate answers) ===")
             user_prompt_parts.append(tool_context)
             user_prompt_parts.append("")
 
@@ -293,10 +304,12 @@ class Agent:
                 history.append({"tool":"search","input":query,"output":trimmed})
                 continue
             break
-        return self.generate_response(question, tool_history=history, user_context=user_context)
+        response = self.generate_response(question, tool_history=history, user_context=user_context)
+        tools_used = list(set([h["tool"] for h in history]))
+        return {"response": response, "tools_used": tools_used}
 
 
-def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime, memory_manager=None) -> str:
+def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime, memory_manager=None, return_metadata: bool = False):
     user_log_path = os.path.join("logs", f"{username}.log")
     logger = SimpleLogger(user_log_path, truncate=False)  # Don't truncate - keep persistent logs
 
@@ -359,8 +372,11 @@ def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime,
 
     try:
         # Generate response with context
-        answer = agent.chat_with_tools(inquiry, max_steps=5, ts_start=timestamp, user_context=user_context)
+        result = agent.chat_with_tools(inquiry, max_steps=5, ts_start=timestamp, user_context=user_context)
+        answer = result["response"]
+        tools_used = result["tools_used"]
         logger.log(f"[final] answer(len={len(answer)}): {answer[:500]}", ts=timestamp)
+        logger.log(f"[tools] used: {tools_used}")
 
         # Save assistant response to history
         if memory_manager:
@@ -401,11 +417,16 @@ def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime,
             except Exception as e:
                 logger.log(f"[warning] Failed to save conversation: {repr(e)}")
 
+        if return_metadata:
+            return {"response": answer, "tools_used": tools_used}
         return answer
 
     except Exception as e:
         logger.log(f"[error] {repr(e)}", ts=timestamp)
-        return "Sorry, something went wrong while generating the response."
+        error_response = "Sorry, something went wrong while generating the response."
+        if return_metadata:
+            return {"response": error_response, "tools_used": []}
+        return error_response
     
 def main():
     print(get_agent_message("user1", "If I invest $500 at 5% annual simple interest for 3 years, how much interest is earned?", datetime.datetime.now()))

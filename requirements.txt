@@ -3,3 +3,4 @@ tavily-python
 discord.py
 python-dotenv
 requests
+sentence-transformers
