@@ -28,7 +28,7 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
         )
     else:
         api_key = os.getenv("GEMINI_API_KEY")
-        model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
         llm_client = GeminiClient(
             api_key=api_key,
             model_name=model_name,

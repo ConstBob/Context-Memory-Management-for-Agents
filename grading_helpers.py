@@ -75,21 +75,85 @@ def check_sodium(day_sodium_mg: float, limit_mg: float) -> bool:
 
 def check_tool_usage(tool_logs: List[str], must_use: List[str]) -> bool:
     # tool_logs: e.g., ["search", "calculator", "search"]
-    logs = set([t.lower().strip() for t in tool_logs])
-    return all(m.lower() in logs for m in must_use)
+    for i in must_use:
+        flag = False
+        for j in tool_logs:
+            if j in i:
+                flag = True
+        if flag is False:
+            return False
+    return True
+
+from typing import List, Dict, Tuple, Optional
+import re
+from collections import Counter
+
+def _find_labeled_number(text: str, labels: List[str]) -> Optional[float]:
+    for label in labels:
+        pattern = re.compile(re.escape(label) + r"\s*:", re.I)
+        for m in pattern.finditer(text):
+            end = m.end()
+            tail = text[end:]
+            num_match = re.search(r"(\d+(\.\d+)?)", tail)
+            if num_match:
+                return float(num_match.group(1))
+
+    for label in labels:
+        pattern = re.compile(re.escape(label), re.I)
+        m = pattern.search(text)
+        if m:
+            start = m.start()
+            prefix = text[:start]
+            nums = list(re.finditer(r"(\d+(\.\d+)?)", prefix))
+            if nums:
+                return float(nums[-1].group(1))
+
+    return None
+
+
 
 def extract_numbers_from_text(text: str) -> Dict[str, float]:
-    # crude extractor: finds first occurrences of kcal, protein g, fiber g, net carbs
-    out = {}
-    kcal = re.search(r"(\d{2,4})\s*(?:kcal|cal|kcals)", text, re.I)
-    prot = re.search(r"(\d{2,3})\s*g\s*protein", text, re.I)
-    fiber = re.search(r"(\d{2,3})\s*g\s*fiber", text, re.I)
-    netc = re.search(r"(\d{1,3})\s*g\s*net\s*carb", text, re.I)
-    if kcal: out["kcal"] = float(kcal.group(1))
-    if prot: out["protein_g"] = float(prot.group(1))
-    if fiber: out["fiber_g"] = float(fiber.group(1))
-    if netc: out["net_carbs_g"] = float(netc.group(1))
+    """
+      - Calories / calorie / cal / kcal / kcals  → kcal
+      - Protein                                 → protein_g
+      - Fiber / fibre                           → fiber_g
+      - Net Carbs / net carb                    → net_carbs_g
+    """
+    out: Dict[str, float] = {}
+
+    kcal = _find_labeled_number(
+        text,
+        ["calories", "calorie", "cal", "kcal", "kcals"]
+    )
+
+    prot = _find_labeled_number(
+        text,
+        ["protein", "proteins"]
+    )
+
+    fiber = _find_labeled_number(
+        text,
+        ["fiber", "fibre"]
+    )
+
+    netc = _find_labeled_number(
+        text,
+        ["net carbs", "net carb"]
+    )
+
+    if kcal is not None:
+        out["kcal"] = kcal
+    if prot is not None:
+        out["protein_g"] = prot
+    if fiber is not None:
+        out["fiber_g"] = fiber
+    if netc is not None:
+        out["net_carbs_g"] = netc
+
     return out
+
+
+
 
 # Example high-level check for a single day (you can adapt to multi-day/week):
 def evaluate_day(user_id: str,

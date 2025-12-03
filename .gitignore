@@ -18,3 +18,4 @@ evaluation_logs/
 .idea/
 *~
 .DS_Store
+/log

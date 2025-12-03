@@ -302,11 +302,22 @@ class MemoryEnhancedEvaluator:
                     conversation_context += f"User: {user_message}\nAgent: {response}\n"
             
             # Use the last response for evaluation (final answer)
+            # final_response = all_responses[-1] if all_responses else ""
+            
+            # # Basic nutrition evaluation (using final response)
+            # nutrition_valid = evaluate_day(user_id, final_response, 0.1)
+            # nutrition_numbers = extract_numbers_from_text(final_response)
+            
+                        # Use the last response for evaluation (final answer)
             final_response = all_responses[-1] if all_responses else ""
             
-            # Basic nutrition evaluation (using final response)
-            nutrition_valid = evaluate_day(user_id, final_response, 0.1)
             nutrition_numbers = extract_numbers_from_text(final_response)
+            nutrition_valid = self._evaluate_nutrition(
+                test,
+                final_response,
+                nutrition_numbers,
+            )
+
             
             # User-specific requirements
             user_requirements = self._extract_user_requirements(user_id, final_response)
@@ -486,6 +497,118 @@ class MemoryEnhancedEvaluator:
                 'context_score': 0,
                 'tool_usage_valid': False
             }
+            
+    def _parse_macro_criteria(self, criteria_text: str):
+        """
+        从 ground_truth['final_answer_criteria'] 里解析：
+        - 是否是整日 Total
+        - kcal 区间
+        - protein 最小值
+        - fiber 最小值
+        """
+        import re
+
+        s = (criteria_text or "").lower()
+        macros = {
+            "is_total": "total" in s,   # 包含 "Total 1710–1890 kcal" 之类
+            "kcal_low": None,
+            "kcal_high": None,
+            "protein_min": None,
+            "fiber_min": None,
+        }
+
+        # 1) Total 1520–1680 kcal / Total 1710–1890 kcal 这类整日目标
+        m_total = re.search(r"total\s+(\d{3,4})\s*[-–]\s*(\d{3,4})\s*kcal", s)
+        if m_total:
+            lo, hi = float(m_total.group(1)), float(m_total.group(2))
+            if lo > hi:
+                lo, hi = hi, lo
+            macros["kcal_low"], macros["kcal_high"] = lo, hi
+        else:
+            # 2) 一般的区间，比如 "540–660 kcal"、"360–440 kcal"
+            m = re.search(r"(\d{3,4})\s*[-–]\s*(\d{3,4})\s*kcal", s)
+            if m:
+                lo, hi = float(m.group(1)), float(m.group(2))
+                if lo > hi:
+                    lo, hi = hi, lo
+                macros["kcal_low"], macros["kcal_high"] = lo, hi
+
+        # 3) 只有一个 kcal 数字，例如 "around 300 kcal"
+        if macros["kcal_low"] is None and macros["kcal_high"] is None:
+            m1 = re.search(r"(\d{3,4})\s*(?:kcal|cal|cals)", s)
+            if m1:
+                center = float(m1.group(1))
+                macros["kcal_low"] = center * 0.8
+                macros["kcal_high"] = center * 1.2
+
+        # 4) protein ≥XX g / ≥XX g protein
+        m_prot = re.search(r"protein\s*(?:≥|>=)\s*(\d{1,3})\s*g", s)
+        if not m_prot:
+            m_prot = re.search(r"(?:≥|>=)\s*(\d{1,3})\s*g\s*protein", s)
+        if m_prot:
+            macros["protein_min"] = float(m_prot.group(1))
+
+        # 5) fiber ≥XX g / ≥XX g fiber
+        m_fib = re.search(r"fiber\s*(?:≥|>=)\s*(\d{1,3})\s*g", s)
+        if not m_fib:
+            m_fib = re.search(r"(?:≥|>=)\s*(\d{1,3})\s*g\s*fiber", s)
+        if m_fib:
+            macros["fiber_min"] = float(m_fib.group(1))
+
+        return macros
+    
+    
+    def _evaluate_nutrition(
+        self,
+        test: Dict[str, Any],
+        response: str,
+        nutrition_numbers: Dict[str, float],
+    ) -> bool:
+        user_id = test.get("user_id")
+        ground_truth = test.get("ground_truth", {}) or {}
+        criteria_text = ground_truth.get("final_answer_criteria", "")
+
+        macros = self._parse_macro_criteria(criteria_text)
+
+        if (not criteria_text) or (
+            macros["kcal_low"] is None
+            and macros["protein_min"] is None
+            and macros["fiber_min"] is None
+        ):
+            return evaluate_day(user_id, response, 0.1)
+
+        if not nutrition_numbers:
+            return False
+
+        kcal = nutrition_numbers.get("kcal", 0.0)
+        protein = nutrition_numbers.get("protein_g", 0.0)
+        fiber = nutrition_numbers.get("fiber_g", 0.0)
+
+        kcal_ok = True
+        protein_ok = True
+        fiber_ok = True
+
+        if macros["kcal_low"] is not None and macros["kcal_high"] is not None and kcal:
+            kcal_ok = macros["kcal_low"] <= kcal <= macros["kcal_high"]
+        elif macros["is_total"] and user_id in ANCHORS:
+            target = ANCHORS[user_id]["kcal"]
+            kcal_ok = abs(kcal - target) <= 0.1 * target
+
+        if macros["protein_min"] is not None:
+            protein_ok = protein >= macros["protein_min"]
+        elif macros["is_total"] and user_id in ANCHORS and "protein_min_g" in ANCHORS[user_id]:
+            protein_ok = protein >= ANCHORS[user_id]["protein_min_g"]
+
+        if macros["fiber_min"] is not None:
+            fiber_ok = fiber >= macros["fiber_min"]
+        elif macros["is_total"]:
+            anchor_f = ANCHORS.get(user_id, {}).get("fiber_min_g", None)
+            if anchor_f is not None:
+                fiber_ok = fiber >= anchor_f
+
+        return kcal_ok and protein_ok and fiber_ok
+
+
     
     def run_evaluation(self) -> Dict[str, Any]:
         """Run comprehensive baseline evaluation."""
