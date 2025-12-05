@@ -140,6 +140,16 @@ All tests require both tools. Log tool usage (e.g., `["search","calculator"]`) a
 
 ### Running
 
+#### Server Environment
+
+Amazon Lightsail Ubuntu 24.04 TLS
+
+  Recommended Size:
+     1 GB Memory /
+     2 vCPUs /
+     40 GB SSD /
+     2 TB Transfer
+
 #### Setup
 1. Install dependencies: `pip install -r requirements.txt`
 2. Create `.env` file with API keys (see `.env.example` for full options):
