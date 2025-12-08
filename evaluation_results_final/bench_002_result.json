@@ -1,0 +1,100 @@
+{
+  "test_id": "bench_002",
+  "user_id": "u02",
+  "question": "Can you do me a veg day at my usual calories and protein, inside my 12–8 window? No cheese.",
+  "response": "I can certainly help you with that! To create your vegetarian, lactose-free meal plan within your 12:00-20:00 fasting window, and avoiding cheese, I still need your usual daily calorie and protein targets.\n\nOnce you provide those numbers, I'll be able to suggest a menu for you.",
+  "all_responses": [
+    "To create your vegetarian meal plan within your 12–8 window, I need a little more information. Could you please tell me:\n\n1.  **Your usual daily calorie target?**\n2.  **Your usual daily protein target?**\n\nOnce I have these details, I can create a delicious and satisfying vegetarian meal plan for you, ensuring it fits your 12–8 eating window and excludes cheese.",
+    "I can certainly help you with that! To create your vegetarian, lactose-free meal plan within your 12:00-20:00 fasting window, and avoiding cheese, I still need your usual daily calorie and protein targets.\n\nOnce you provide those numbers, I'll be able to suggest a menu for you."
+  ],
+  "conversation_context": "User: Can you do me a veg day at my usual calories and protein, inside my 12–8 window? No cheese.\nAgent: To create your vegetarian meal plan within your 12–8 window, I need a little more information. Could you please tell me:\n\n1.  **Your usual daily calorie target?**\n2.  **Your usual daily protein target?**\n\nOnce I have these details, I can create a delicious and satisfying vegetarian meal plan for you, ensuring it fits your 12–8 eating window and excludes cheese.\nUser: Keep it metric and please don’t repeat anything from earlier this week.\nAgent: I can certainly help you with that! To create your vegetarian, lactose-free meal plan within your 12:00-20:00 fasting window, and avoiding cheese, I still need your usual daily calorie and protein targets.\n\nOnce you provide those numbers, I'll be able to suggest a menu for you.\n",
+  "passed": false,
+  "nutrition_valid": false,
+  "nutrition_numbers": {
+    "kcal": 0.0,
+    "protein_g": 0.0
+  },
+  "user_requirements": {
+    "vegetarian": true,
+    "lactose_free": false,
+    "metric_units": false,
+    "fasting_window": true
+  },
+  "user_req_score": 0.5,
+  "context_dependencies": {
+    "inter_session_recall": false,
+    "ambiguous_handling": true,
+    "variety_awareness": false
+  },
+  "context_score": 0.3333333333333333,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "3 meals (12:00, ~15:30, ~19:30). Total 1520–1680 kcal; protein ≥110 g; lactose‑free; vegetarian; metric.",
+    "must_use": [
+      "calculator for day total and per‑meal macros",
+      "search for nutrition of at least one new ingredient/recipe"
+    ],
+    "must_not": [
+      "cheese/dairy",
+      "dishes already in menu_history",
+      "meals outside 12–20 window"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "vegetarian",
+      "lactose intolerant",
+      "16:8 fasting 12:00–20:00"
+    ],
+    "inter_session": [
+      "from u02_s1_med3day (bench_007): 1600 kcal, protein ≥110 g, metric units, microwave + rice cooker only",
+      "menu_history for this week"
+    ]
+  },
+  "length": "short",
+  "total_turns": 4,
+  "evaluation_timestamp": "2025-12-07T11:26:02.089259",
+  "latency_total": 10.154879874000471,
+  "input_tokens_total": 690,
+  "output_tokens_total": 106,
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": false
+  },
+  "advanced_score": 0.75,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": false,
+  "meal_times": [
+    "12:00",
+    "20:00",
+    "12:00",
+    "20:00"
+  ],
+  "proposed_dishes": [
+    "free meal plan within your 12:00",
+    "20:00 fasting window, and avoiding cheese, I still need your usual daily calorie and protein targets."
+  ],
+  "primary_proteins": [
+    "cheese"
+  ],
+  "ingredients": [
+    "avoiding cheese"
+  ],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": [
+    "calculator",
+    "search"
+  ]
+}

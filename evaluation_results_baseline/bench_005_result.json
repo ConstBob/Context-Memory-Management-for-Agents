@@ -1,0 +1,99 @@
+{
+  "test_id": "bench_005",
+  "user_id": "u01",
+  "question": "Quick breakfast around 400 cals with 30+ protein, no peanuts, and not oatmeal. US units.",
+  "response": "Here are two quick breakfast options around 400 calories with over 30g of protein, no peanuts, and not oatmeal:\n\n1.  **Greek Yogurt Parfait with Berries and Seeds**\n    *   1 cup (224g) plain non-fat Greek yogurt\n    *   1/2 cup (75g) mixed berries (like blueberries, raspberries, strawberries)\n    *   2 tablespoons (16g) chia seeds\n    *   1 tablespoon (10g) chopped almonds (ensure no cross-contamination with peanuts if allergy is severe)\n\n    *   **Estimated Nutrition:**\n        *   Calories: ~390\n        *   Protein: ~33g\n        *   Fiber: ~10g\n\n2.  **Scrambled Eggs with Smoked Salmon and Avocado**\n    *   2 large eggs\n    *   2 oz (56g) smoked salmon\n    *   1/4 medium avocado\n    *   1/2 cup (30g) baby spinach (wilted into eggs)\n    *   Salt and pepper to taste\n\n    *   **Estimated Nutrition:**\n        *   Calories: ~395\n        *   Protein: ~31g\n        *   Fiber: ~4g",
+  "all_responses": [
+    "Here are two quick breakfast options around 400 calories with over 30g of protein, no peanuts, and not oatmeal:\n\n1.  **Greek Yogurt Parfait with Berries and Seeds**\n    *   1 cup (224g) plain non-fat Greek yogurt\n    *   1/2 cup (75g) mixed berries (like blueberries, raspberries, strawberries)\n    *   2 tablespoons (16g) chia seeds\n    *   1 tablespoon (10g) chopped almonds (ensure no cross-contamination with peanuts if allergy is severe)\n\n    *   **Estimated Nutrition:**\n        *   Calories: ~390\n        *   Protein: ~33g\n        *   Fiber: ~10g\n\n2.  **Scrambled Eggs with Smoked Salmon and Avocado**\n    *   2 large eggs\n    *   2 oz (56g) smoked salmon\n    *   1/4 medium avocado\n    *   1/2 cup (30g) baby spinach (wilted into eggs)\n    *   Salt and pepper to taste\n\n    *   **Estimated Nutrition:**\n        *   Calories: ~395\n        *   Protein: ~31g\n        *   Fiber: ~4g"
+  ],
+  "conversation_context": "User: Quick breakfast around 400 cals with 30+ protein, no peanuts, and not oatmeal. US units.\nAgent: Here are two quick breakfast options around 400 calories with over 30g of protein, no peanuts, and not oatmeal:\n\n1.  **Greek Yogurt Parfait with Berries and Seeds**\n    *   1 cup (224g) plain non-fat Greek yogurt\n    *   1/2 cup (75g) mixed berries (like blueberries, raspberries, strawberries)\n    *   2 tablespoons (16g) chia seeds\n    *   1 tablespoon (10g) chopped almonds (ensure no cross-contamination with peanuts if allergy is severe)\n\n    *   **Estimated Nutrition:**\n        *   Calories: ~390\n        *   Protein: ~33g\n        *   Fiber: ~10g\n\n2.  **Scrambled Eggs with Smoked Salmon and Avocado**\n    *   2 large eggs\n    *   2 oz (56g) smoked salmon\n    *   1/4 medium avocado\n    *   1/2 cup (30g) baby spinach (wilted into eggs)\n    *   Salt and pepper to taste\n\n    *   **Estimated Nutrition:**\n        *   Calories: ~395\n        *   Protein: ~31g\n        *   Fiber: ~4g\n",
+  "passed": true,
+  "nutrition_valid": true,
+  "nutrition_numbers": {
+    "kcal": 390.0,
+    "protein_g": 33.0,
+    "fiber_g": 10.0
+  },
+  "user_requirements": {
+    "peanut_allergy": true,
+    "us_units": true,
+    "med_mex": false
+  },
+  "user_req_score": 0.6666666666666666,
+  "context_dependencies": {
+    "inter_session_recall": false,
+    "ambiguous_handling": false,
+    "variety_awareness": false
+  },
+  "context_score": 0.0,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "1–2 breakfast options 360–440 kcal, protein ≥30 g; no peanuts; not oatmeal; US units.",
+    "must_use": [
+      "calculator for macro/energy check",
+      "search for nutrition if using new branded yogurt/cereal"
+    ],
+    "must_not": [
+      "peanuts",
+      "oatmeal",
+      "repeat from menu_history"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "US units",
+      "peanut allergy",
+      "dislike: plain oats"
+    ],
+    "inter_session": [
+      "from u01_s1_dayplan (bench_006) and u01_s3_long_week (bench_011): 1800 kcal cut, protein ≥140 g",
+      "menu_history breakfasts this week"
+    ]
+  },
+  "length": "short",
+  "total_turns": 2,
+  "evaluation_timestamp": "2025-12-07T19:33:41.877802",
+  "latency_total": 10.004045193996717,
+  "input_tokens_total": 515,
+  "output_tokens_total": 127,
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": false
+  },
+  "advanced_score": 0.75,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": false,
+  "meal_times": [],
+  "proposed_dishes": [
+    "Greek Yogurt Parfait with Berries and Seeds",
+    "Estimated Nutrition:",
+    "Scrambled Eggs with Smoked Salmon and Avocado",
+    "Estimated Nutrition:",
+    "fat Greek yogurt",
+    "contamination with peanuts if allergy is severe)",
+    "1.  **Greek Yogurt Parfait with Berries and Seeds**",
+    "2.  **Scrambled Eggs with Smoked Salmon and Avocado**"
+  ],
+  "primary_proteins": [
+    "salmon",
+    "eggs",
+    "yogurt"
+  ],
+  "ingredients": [],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": [
+    "search"
+  ]
+}

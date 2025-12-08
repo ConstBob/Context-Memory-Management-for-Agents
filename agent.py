@@ -226,7 +226,7 @@ class Agent:
         self._search_cache[key] = res
         return res
 
-    def generate_response(self, question, tool_history=None, user_context=None):
+    def generate_response(self, question, tool_history=None, user_context=None, return_usage: bool = False):
         tool_context = self._format_history(tool_history or [])
 
         # Build comprehensive prompt with user context
@@ -277,7 +277,24 @@ If tool outputs are provided, use them to give accurate, verified answers."""
         }
 
         self.logger.log("[final] prompt:\n" + prompt['user'] + "\n======================================================================\n")
-        return self.gemini_client.infer(prompt)
+        text = self.gemini_client.infer(prompt)
+
+        if not return_usage:
+            # 原来的行为：只返回文本
+            return text
+
+        # -------- 新增：统计 input / output “token” 数（按单词分） --------
+        total_input_str = (prompt.get('system') or '') + "\n" + (prompt.get('user') or '')
+        input_tokens = len(total_input_str.split())
+        output_tokens = len((text or "").split())
+
+        usage = {
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+        }
+
+        return text, usage
+
     
     def chat_with_tools(self, question, max_steps=5, ts_start: datetime.datetime | None = None, user_context=None):
         self.logger.log(f"[start] question: {question}", ts=ts_start)
@@ -304,12 +321,40 @@ If tool outputs are provided, use them to give accurate, verified answers."""
                 history.append({"tool":"search","input":query,"output":trimmed})
                 continue
             break
-        response = self.generate_response(question, tool_history=history, user_context=user_context)
+
+        # ✅ 调用 generate_response 时，让它返回 usage
+        response, usage = self.generate_response(
+            question,
+            tool_history=history,
+            user_context=user_context,
+            return_usage=True,
+        )
+
         tools_used = list(set([h["tool"] for h in history]))
-        return {"response": response, "tools_used": tools_used}
+
+        # 这里把 usage 一起返回，外层就能看到 input_tokens / output_tokens
+        return {
+            "response": response,
+            "tools_used": tools_used,
+            "usage": usage,
+        }
 
 
-def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime, memory_manager=None, return_metadata: bool = False):
+
+import os
+import datetime
+import time
+from agent import Agent, GeminiClient, OpenRouterClient, RateLimiter, SimpleLogger
+from tavily import TavilyClient
+
+
+def get_agent_message(
+    username: str,
+    inquiry: str,
+    timestamp: datetime.datetime,
+    memory_manager=None,
+    return_metadata: bool = False
+):
     user_log_path = os.path.join("logs", f"{username}.log")
     logger = SimpleLogger(user_log_path, truncate=False)  # Don't truncate - keep persistent logs
 
@@ -328,7 +373,7 @@ def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime,
         )
     else:  # Default to Gemini
         api_key = os.getenv("GEMINI_API_KEY")
-        model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
         llm_client = GeminiClient(
             api_key=api_key,
             model_name=model_name,
@@ -344,89 +389,80 @@ def get_agent_message(username: str, inquiry: str, timestamp: datetime.datetime,
     logger.log(f"[user] {username}", ts=timestamp)
     logger.log(f"[channel] discord", ts=timestamp)
 
-    # Build user context from memory manager
     user_context = None
-    if memory_manager:
-        try:
-            # Get context from memory manager
-            user_context = memory_manager.build_context_for_llm(
-                user_id=username,
-                current_query=inquiry,
-                include_menu_days=7,
-                include_message_limit=10
-            )
-
-            # Add user message to history
-            memory_manager.add_message(
-                user_id=username,
-                role='user',
-                content=inquiry,
-                timestamp=timestamp
-            )
-
-            logger.log(f"[context] Loaded profile and history for {username}")
-
-        except Exception as e:
-            logger.log(f"[warning] Failed to load user context: {repr(e)}")
-            user_context = None
 
     try:
-        # Generate response with context
-        result = agent.chat_with_tools(inquiry, max_steps=5, ts_start=timestamp, user_context=user_context)
+        t0 = time.perf_counter()
+        result = agent.chat_with_tools(
+            inquiry,
+            max_steps=5,
+            ts_start=timestamp,
+            user_context=user_context
+        )
+        latency = time.perf_counter() - t0
+
         answer = result["response"]
-        tools_used = result["tools_used"]
+        tools_used = result.get("tools_used", [])
+
+        raw_usage = result.get("usage") or result.get("token_usage") or {}
+        input_tokens = (
+            raw_usage.get("input_tokens")
+            or raw_usage.get("prompt_tokens")
+            or raw_usage.get("input", 0)
+            or 0
+        )
+        output_tokens = (
+            raw_usage.get("output_tokens")
+            or raw_usage.get("completion_tokens")
+            or raw_usage.get("output", 0)
+            or 0
+        )
+
+        # 保证是 int
+        try:
+            input_tokens = int(input_tokens)
+        except Exception:
+            input_tokens = 0
+        try:
+            output_tokens = int(output_tokens)
+        except Exception:
+            output_tokens = 0
+
+        usage = {
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+        }
+
+        logger.log(
+            f"[metrics] latency={latency:.3f}s, tokens(in={input_tokens}, out={output_tokens})",
+            ts=timestamp
+        )
+
         logger.log(f"[final] answer(len={len(answer)}): {answer[:500]}", ts=timestamp)
         logger.log(f"[tools] used: {tools_used}")
 
-        # Save assistant response to history
-        if memory_manager:
-            try:
-                memory_manager.add_message(
-                    user_id=username,
-                    role='assistant',
-                    content=answer,
-                    timestamp=datetime.datetime.now()
-                )
-
-                # Try to extract and update profile from this conversation
-                conversation_text = f"User: {inquiry}\nAssistant: {answer}"
-                extracted_profile = memory_manager.extract_profile_from_conversation(
-                    user_id=username,
-                    conversation_text=conversation_text,
-                    gemini_client=llm_client
-                )
-
-                if extracted_profile:
-                    memory_manager.update_user_profile(username, extracted_profile)
-                    logger.log(f"[profile] Updated profile with: {list(extracted_profile.keys())}")
-
-                # Extract and save menu items if this was a meal planning response
-                try:
-                    from menu_extractor import integrate_menu_tracking
-                    meals = integrate_menu_tracking(
-                        user_id=username,
-                        response=answer,
-                        gemini_client=llm_client,
-                        memory_manager=memory_manager
-                    )
-                    if meals:
-                        logger.log(f"[menu] Saved {len(meals)} meals to history")
-                except Exception as e:
-                    logger.log(f"[warning] Failed to extract menu items: {repr(e)}")
-
-            except Exception as e:
-                logger.log(f"[warning] Failed to save conversation: {repr(e)}")
 
         if return_metadata:
-            return {"response": answer, "tools_used": tools_used}
+            return {
+                "response": answer,
+                "tools_used": tools_used,
+                "latency": latency,
+                "usage": usage,
+            }
         return answer
 
     except Exception as e:
         logger.log(f"[error] {repr(e)}", ts=timestamp)
         error_response = "Sorry, something went wrong while generating the response."
         if return_metadata:
-            return {"response": error_response, "tools_used": []}
+            return {
+                "response": error_response,
+                "tools_used": [],
+                "latency": 0.0,
+                "usage": {"input_tokens": 0, "output_tokens": 0},
+            }
         return error_response
+
     
 def main():
     print(get_agent_message("user1", "If I invest $500 at 5% annual simple interest for 3 years, how much interest is earned?", datetime.datetime.now()))

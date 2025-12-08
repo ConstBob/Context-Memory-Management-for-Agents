@@ -274,12 +274,16 @@ class MemoryEnhancedEvaluator:
             conversation_context = ""
             
             all_tools_used = []
+            
+            total_latency = 0.0
+            total_input_tokens = 0
+            total_output_tokens = 0
 
             for i, turn in enumerate(turns):
                 if turn['role'] == 'user':
                     user_message = turn['text']
                     self._log(f"  Turn {i+1} - User: {user_message}")
-
+                    from agent import get_agent_message
                     # Get agent response with memory and RAG
                     result = get_agent_message_with_rag(
                         user_id, user_message, datetime.datetime.now(),
@@ -287,10 +291,19 @@ class MemoryEnhancedEvaluator:
                         rag_system=self.rag_system,
                         return_metadata=True
                     )
+                    # result = get_agent_message(user_id, user_message, datetime.datetime.now(), return_metadata=True)
 
                     response = result["response"]
                     tools_used = result["tools_used"]
                     all_tools_used.extend(tools_used)
+                    
+                    latency = result.get("latency", 0.0)
+                    usage = result.get("usage", {}) or result.get("token_usage", {})
+
+                    # 这里假设 usage = {"input_tokens": ..., "output_tokens": ...}
+                    total_latency += latency
+                    total_input_tokens += usage.get("input_tokens", 0)
+                    total_output_tokens += usage.get("output_tokens", 0)
 
                     # Log the full agent response
                     self._log(f"  Turn {i+1} - Agent Response:")
@@ -436,6 +449,10 @@ class MemoryEnhancedEvaluator:
                 'total_turns': len(turns),
                 'evaluation_timestamp': datetime.datetime.now(),
                 
+                'latency_total': total_latency,
+                'input_tokens_total': total_input_tokens,
+                'output_tokens_total': total_output_tokens,
+                
                 # Advanced evaluation metrics
                 'advanced_scores': advanced_scores,
                 'advanced_score': advanced_score,
@@ -480,6 +497,9 @@ class MemoryEnhancedEvaluator:
             self._log(f"    Proposed Dishes: {proposed_dishes}")
             self._log(f"    Primary Proteins: {primary_proteins}")
             self._log(f"    Ingredients: {ingredients}")
+            self._log(f"    Total Latency (s): {total_latency:.3f}")
+            self._log(f"    Total Input Tokens: {total_input_tokens}")
+            self._log(f"    Total Output Tokens: {total_output_tokens}")
             
             return result
             
@@ -655,6 +675,14 @@ class MemoryEnhancedEvaluator:
         # Task completion rate
         completion_rate = passed_tests / total_tests if total_tests > 0 else 0
         
+        total_latency_sum = sum(r.get('latency_total', 0.0) for r in self.results)
+        total_input_tokens_sum = sum(r.get('input_tokens_total', 0) for r in self.results)
+        total_output_tokens_sum = sum(r.get('output_tokens_total', 0) for r in self.results)
+
+        avg_latency_per_test = total_latency_sum / total_tests if total_tests > 0 else 0.0
+        avg_input_tokens_per_test = total_input_tokens_sum / total_tests if total_tests > 0 else 0.0
+        avg_output_tokens_per_test = total_output_tokens_sum / total_tests if total_tests > 0 else 0.0
+        
         # Tool call efficiency (simplified)
         tool_efficiency = sum(1 for r in self.results if r.get('tool_usage_valid', False)) / total_tests
         
@@ -731,6 +759,14 @@ class MemoryEnhancedEvaluator:
                 'medium_tests': len(medium_tests),
                 'long_tests': len(long_tests)
             },
+            'latency_and_tokens': {
+                'total_latency': total_latency_sum,
+                'total_input_tokens': total_input_tokens_sum,
+                'total_output_tokens': total_output_tokens_sum,
+                'avg_latency_per_test': avg_latency_per_test,
+                'avg_input_tokens_per_test': avg_input_tokens_per_test,
+                'avg_output_tokens_per_test': avg_output_tokens_per_test,
+            },
             'user_analysis': user_analysis,
             'failed_tests': [r for r in self.results if not r['passed']]
         }
@@ -801,7 +837,10 @@ class MemoryEnhancedEvaluator:
                     'fasting_window_valid': r.get('fasting_window_valid', False),
                     'netcarb_caps_valid': r.get('netcarb_caps_valid', False),
                     'sodium_valid': r.get('sodium_valid', False),
-                    'length': r.get('length', 'unknown')
+                    'length': r.get('length', 'unknown'), 
+                    'latency_total': r.get('latency_total', 0.0),
+                    'input_tokens_total': r.get('input_tokens_total', 0),
+                    'output_tokens_total': r.get('output_tokens_total', 0),
                 } for r in self.results
             ]
         }
@@ -823,6 +862,14 @@ class MemoryEnhancedEvaluator:
         print(f"Passed Tests: {analysis['passed_tests']}")
         print(f"Task Completion Rate: {analysis['task_completion_rate']:.2%}")
         print(f"Tool Call Efficiency: {analysis['tool_call_efficiency']:.2%}")
+        lt = analysis.get('latency_and_tokens', {})
+        print(f"\nLATENCY & TOKEN USAGE:")
+        print(f"Total Latency (s): {lt.get('total_latency', 0.0):.3f}")
+        print(f"Total Input Tokens: {lt.get('total_input_tokens', 0)}")
+        print(f"Total Output Tokens: {lt.get('total_output_tokens', 0)}")
+        print(f"Avg Latency per Test (s): {lt.get('avg_latency_per_test', 0.0):.3f}")
+        print(f"Avg Input Tokens per Test: {lt.get('avg_input_tokens_per_test', 0):.1f}")
+        print(f"Avg Output Tokens per Test: {lt.get('avg_output_tokens_per_test', 0):.1f}")
         
         # Response quality
         print(f"\nRESPONSE QUALITY:")

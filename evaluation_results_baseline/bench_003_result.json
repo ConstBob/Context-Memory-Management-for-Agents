@@ -1,0 +1,99 @@
+{
+  "test_id": "bench_003",
+  "user_id": "u04",
+  "question": "I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.",
+  "response": "Here is a fresh pescatarian meal plan for you, avoiding tuna and any dishes from your previous meals:\n\n**Breakfast:**\n*   **Smoked Salmon and Avocado Toast:** 2 slices of whole-wheat toast topped with 3 oz smoked salmon, 1/4 mashed avocado, and a sprinkle of red pepper flakes.\n\n**Lunch:**\n*   **Shrimp and Quinoa Salad:** A salad made with 4 oz cooked shrimp, 1 cup cooked quinoa, 1/2 cup chopped cucumber, 1/4 cup chopped bell pepper, and a lemon-herb vinaigrette.\n\n**Dinner:**\n*   **Baked Cod with Roasted Vegetables:** 6 oz cod fillet baked with lemon slices and herbs, served with 1.5 cups of roasted broccoli and sweet potatoes.\n\nLet me know if you'd like any adjustments or more options!",
+  "all_responses": [
+    "Here is a fresh pescatarian meal plan for you, avoiding tuna and any dishes from your previous meals:\n\n**Breakfast:**\n*   **Smoked Salmon and Avocado Toast:** 2 slices of whole-wheat toast topped with 3 oz smoked salmon, 1/4 mashed avocado, and a sprinkle of red pepper flakes.\n\n**Lunch:**\n*   **Shrimp and Quinoa Salad:** A salad made with 4 oz cooked shrimp, 1 cup cooked quinoa, 1/2 cup chopped cucumber, 1/4 cup chopped bell pepper, and a lemon-herb vinaigrette.\n\n**Dinner:**\n*   **Baked Cod with Roasted Vegetables:** 6 oz cod fillet baked with lemon slices and herbs, served with 1.5 cups of roasted broccoli and sweet potatoes.\n\nLet me know if you'd like any adjustments or more options!"
+  ],
+  "conversation_context": "User: I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.\nAgent: Here is a fresh pescatarian meal plan for you, avoiding tuna and any dishes from your previous meals:\n\n**Breakfast:**\n*   **Smoked Salmon and Avocado Toast:** 2 slices of whole-wheat toast topped with 3 oz smoked salmon, 1/4 mashed avocado, and a sprinkle of red pepper flakes.\n\n**Lunch:**\n*   **Shrimp and Quinoa Salad:** A salad made with 4 oz cooked shrimp, 1 cup cooked quinoa, 1/2 cup chopped cucumber, 1/4 cup chopped bell pepper, and a lemon-herb vinaigrette.\n\n**Dinner:**\n*   **Baked Cod with Roasted Vegetables:** 6 oz cod fillet baked with lemon slices and herbs, served with 1.5 cups of roasted broccoli and sweet potatoes.\n\nLet me know if you'd like any adjustments or more options!\n",
+  "passed": false,
+  "nutrition_valid": false,
+  "nutrition_numbers": {},
+  "user_requirements": {
+    "pescatarian": false,
+    "no_tuna": false,
+    "us_units": true,
+    "japanese_thai": false
+  },
+  "user_req_score": 0.25,
+  "context_dependencies": {
+    "inter_session_recall": true,
+    "ambiguous_handling": true,
+    "variety_awareness": false
+  },
+  "context_score": 0.6666666666666666,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "Total 2090–2310 kcal; protein ≥130 g; pescatarian; excludes tuna; no repeats vs. menu_history.",
+    "must_use": [
+      "calculator day total",
+      "search for any new seafood or packaged item nutrition used"
+    ],
+    "must_not": [
+      "tuna",
+      "repeat exact dishes"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "pescatarian",
+      "no tuna"
+    ],
+    "inter_session": [
+      "from u04_s1_med_day (bench_009): 2200 kcal target, protein ≥130 g, fiber ≥30 g, Japanese/Thai preference",
+      "menu_history of last 3 days"
+    ]
+  },
+  "length": "short",
+  "total_turns": 2,
+  "evaluation_timestamp": "2025-12-07T19:33:24.327063",
+  "latency_total": 10.643264127000293,
+  "input_tokens_total": 837,
+  "output_tokens_total": 115,
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": true
+  },
+  "advanced_score": 0.875,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": true,
+  "meal_times": [],
+  "proposed_dishes": [
+    "Breakfast:",
+    "Smoked Salmon and Avocado Toast:",
+    "Lunch:",
+    "Shrimp and Quinoa Salad:",
+    "Dinner:",
+    "Baked Cod with Roasted Vegetables:",
+    "wheat toast topped with 3 oz smoked salmon, 1/4 mashed avocado, and a sprinkle of red pepper flakes.",
+    "herb vinaigrette.",
+    "1.5 cups of roasted broccoli and sweet potatoes."
+  ],
+  "primary_proteins": [
+    "salmon",
+    "tuna",
+    "cod",
+    "shrimp"
+  ],
+  "ingredients": [
+    "Roasted Vegetables",
+    "and herbs"
+  ],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": [
+    "search"
+  ]
+}

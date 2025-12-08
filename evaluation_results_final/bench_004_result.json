@@ -1,0 +1,110 @@
+{
+  "test_id": "bench_004",
+  "user_id": "u03",
+  "question": "Tonight, can we swap dinner for something grillable and halal? Roughly 600 cals, 40+ protein, and keep net carbs low like before—around 20 g or less. No repeats.",
+  "response": "Here are a few grillable and halal dinner options for you, keeping your nutritional goals in mind:\n\n1.  **Grilled Lamb Kofta Skewers with a Side Salad**\n    *   **Description:** Ground lamb seasoned with Mediterranean spices (cumin, coriander, garlic, onion, parsley) formed into skewers and grilled. Served with a fresh mixed green salad with cucumber, tomatoes, and a light lemon-herb vinaigrette.\n    *   **Estimated Nutrition:**\n        *   Calories: ~580 kcal\n        *   Protein: ~45 g\n        *   Net Carbs: ~15 g\n\n2.  **Halal Chicken and Vegetable Kebabs**\n    *   **Description:** Cubes of halal chicken breast marinated in lemon juice, olive oil, garlic, and herbs, threaded onto skewers with colorful bell peppers, onions, and zucchini. Grilled until tender and slightly charred.\n    *   **Estimated Nutrition:**\n        *   Calories: ~590 kcal\n        *   Protein: ~48 g\n        *   Net Carbs: ~18 g\n\n3.  **Grilled Salmon with Asparagus**\n    *   **Description:** A salmon fillet seasoned with salt, pepper, and a touch of dill, grilled to flaky perfection. Served alongside grilled asparagus spears tossed with a little olive oil and lemon zest.\n    *   **Estimated Nutrition:**\n        *   Calories: ~610 kcal\n        *   Protein: ~42 g\n        *   Net Carbs: ~10 g\n\nWould any of these options work for you tonight?",
+  "all_responses": [
+    "Here are a few grillable and halal dinner options for you, keeping your nutritional goals in mind:\n\n1.  **Grilled Lamb Kofta Skewers with a Side Salad**\n    *   **Description:** Ground lamb seasoned with Mediterranean spices (cumin, coriander, garlic, onion, parsley) formed into skewers and grilled. Served with a fresh mixed green salad with cucumber, tomatoes, and a light lemon-herb vinaigrette.\n    *   **Estimated Nutrition:**\n        *   Calories: ~580 kcal\n        *   Protein: ~45 g\n        *   Net Carbs: ~15 g\n\n2.  **Halal Chicken and Vegetable Kebabs**\n    *   **Description:** Cubes of halal chicken breast marinated in lemon juice, olive oil, garlic, and herbs, threaded onto skewers with colorful bell peppers, onions, and zucchini. Grilled until tender and slightly charred.\n    *   **Estimated Nutrition:**\n        *   Calories: ~590 kcal\n        *   Protein: ~48 g\n        *   Net Carbs: ~18 g\n\n3.  **Grilled Salmon with Asparagus**\n    *   **Description:** A salmon fillet seasoned with salt, pepper, and a touch of dill, grilled to flaky perfection. Served alongside grilled asparagus spears tossed with a little olive oil and lemon zest.\n    *   **Estimated Nutrition:**\n        *   Calories: ~610 kcal\n        *   Protein: ~42 g\n        *   Net Carbs: ~10 g\n\nWould any of these options work for you tonight?"
+  ],
+  "conversation_context": "User: Tonight, can we swap dinner for something grillable and halal? Roughly 600 cals, 40+ protein, and keep net carbs low like before—around 20 g or less. No repeats.\nAgent: Here are a few grillable and halal dinner options for you, keeping your nutritional goals in mind:\n\n1.  **Grilled Lamb Kofta Skewers with a Side Salad**\n    *   **Description:** Ground lamb seasoned with Mediterranean spices (cumin, coriander, garlic, onion, parsley) formed into skewers and grilled. Served with a fresh mixed green salad with cucumber, tomatoes, and a light lemon-herb vinaigrette.\n    *   **Estimated Nutrition:**\n        *   Calories: ~580 kcal\n        *   Protein: ~45 g\n        *   Net Carbs: ~15 g\n\n2.  **Halal Chicken and Vegetable Kebabs**\n    *   **Description:** Cubes of halal chicken breast marinated in lemon juice, olive oil, garlic, and herbs, threaded onto skewers with colorful bell peppers, onions, and zucchini. Grilled until tender and slightly charred.\n    *   **Estimated Nutrition:**\n        *   Calories: ~590 kcal\n        *   Protein: ~48 g\n        *   Net Carbs: ~18 g\n\n3.  **Grilled Salmon with Asparagus**\n    *   **Description:** A salmon fillet seasoned with salt, pepper, and a touch of dill, grilled to flaky perfection. Served alongside grilled asparagus spears tossed with a little olive oil and lemon zest.\n    *   **Estimated Nutrition:**\n        *   Calories: ~610 kcal\n        *   Protein: ~42 g\n        *   Net Carbs: ~10 g\n\nWould any of these options work for you tonight?\n",
+  "passed": false,
+  "nutrition_valid": true,
+  "nutrition_numbers": {
+    "kcal": 580.0,
+    "protein_g": 45.0,
+    "net_carbs_g": 15.0
+  },
+  "user_requirements": {
+    "halal": true,
+    "low_glycemic": false,
+    "us_units": false,
+    "grill_airfryer": true
+  },
+  "user_req_score": 0.5,
+  "context_dependencies": {
+    "inter_session_recall": false,
+    "ambiguous_handling": true,
+    "variety_awareness": false
+  },
+  "context_score": 0.3333333333333333,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "One dinner idea 540–660 kcal, net carbs ≤20 g, protein ≥40 g; halal; grillable; not previously used.",
+    "must_use": [
+      "calculator to verify kcal/net carbs/protein",
+      "search for carb counts if new marinade or packaged item"
+    ],
+    "must_not": [
+      "pork/alcohol marinades",
+      "repeat dish"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "halal",
+      "low‑glycemic focus",
+      "US units"
+    ],
+    "inter_session": [
+      "from u03_s1_med_2day (bench_008): 2000 kcal, protein ≥150 g, fiber ≥30 g; grill + air fryer available",
+      "menu_history day1–2"
+    ]
+  },
+  "length": "short",
+  "total_turns": 2,
+  "evaluation_timestamp": "2025-12-07T11:26:24.723157",
+  "latency_total": 6.874020165000275,
+  "input_tokens_total": 211,
+  "output_tokens_total": 191,
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": false
+  },
+  "advanced_score": 0.75,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": false,
+  "meal_times": [],
+  "proposed_dishes": [
+    "Grilled Lamb Kofta Skewers with a Side Salad",
+    "Description:",
+    "Estimated Nutrition:",
+    "Halal Chicken and Vegetable Kebabs",
+    "Description:",
+    "Estimated Nutrition:",
+    "Grilled Salmon with Asparagus",
+    "Description:",
+    "Estimated Nutrition:",
+    "herb vinaigrette.",
+    "1.  **Grilled Lamb Kofta Skewers with a Side Salad**",
+    "2.  **Halal Chicken and Vegetable Kebabs**",
+    "3.  **Grilled Salmon with Asparagus**"
+  ],
+  "primary_proteins": [
+    "chicken",
+    "lamb",
+    "salmon"
+  ],
+  "ingredients": [
+    "olive oil",
+    "olive oil",
+    "and Vegetable",
+    "Mediterranean spices",
+    "and herbs"
+  ],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": [
+    "calculator"
+  ]
+}

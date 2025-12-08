@@ -1,0 +1,108 @@
+{
+  "test_id": "bench_003",
+  "user_id": "u04",
+  "question": "I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.",
+  "response": "Here is a pescatarian meal plan for you, avoiding tuna and any previously suggested dishes:\n\n**Breakfast:**\n*   **Smoked Salmon and Cream Cheese Bagel Thin**\n    *   1 whole wheat bagel thin (approx. 110 calories, 4g protein, 2g fiber)\n    *   2 oz cream cheese (approx. 200 calories, 2g protein)\n    *   2 oz smoked salmon (approx. 100 calories, 12g protein)\n    *   *Total Estimated Calories: 410*\n    *   *Total Estimated Protein: 18g*\n    *   *Total Estimated Fiber: 2g*\n\n**Lunch:**\n*   **Shrimp and Avocado Salad**\n    *   4 oz cooked shrimp (approx. 120 calories, 24g protein)\n    *   1/2 medium avocado (approx. 160 calories, 2g protein, 7g fiber)\n    *   Mixed greens (negligible calories/protein/fiber)\n    *   1 tbsp olive oil (approx. 120 calories)\n    *   1 tbsp lemon juice (negligible calories/protein/fiber)\n    *   *Total Estimated Calories: 400*\n    *   *Total Estimated Protein: 26g*\n    *   *Total Estimated Fiber: 7g*\n\n**Dinner:**\n*   **Baked Cod with Roasted Asparagus and Quinoa**\n    *   6 oz cod fillet (approx. 180 calories, 36g protein)\n    *   1 cup asparagus (approx. 40 calories, 4g protein, 4g fiber)\n    *   1 tsp olive oil for roasting asparagus (approx. 40 calories)\n    *   1/2 cup cooked quinoa (approx. 110 calories, 4g protein, 3g fiber)\n    *   Lemon wedges and herbs for seasoning (negligible calories/protein/fiber)\n    *   *Total Estimated Calories: 370*\n    *   *Total Estimated Protein: 44g*\n    *   *Total Estimated Fiber: 7g*\n\n**Estimated Daily Totals:**\n*   **Calories:** Approximately 1180\n*   **Protein:** Approximately 88g\n*   **Fiber:** Approximately 16g\n\nPlease let me know if you'd like any adjustments or have other preferences!",
+  "all_responses": [
+    "Here is a pescatarian meal plan for you, avoiding tuna and any previously suggested dishes:\n\n**Breakfast:**\n*   **Smoked Salmon and Cream Cheese Bagel Thin**\n    *   1 whole wheat bagel thin (approx. 110 calories, 4g protein, 2g fiber)\n    *   2 oz cream cheese (approx. 200 calories, 2g protein)\n    *   2 oz smoked salmon (approx. 100 calories, 12g protein)\n    *   *Total Estimated Calories: 410*\n    *   *Total Estimated Protein: 18g*\n    *   *Total Estimated Fiber: 2g*\n\n**Lunch:**\n*   **Shrimp and Avocado Salad**\n    *   4 oz cooked shrimp (approx. 120 calories, 24g protein)\n    *   1/2 medium avocado (approx. 160 calories, 2g protein, 7g fiber)\n    *   Mixed greens (negligible calories/protein/fiber)\n    *   1 tbsp olive oil (approx. 120 calories)\n    *   1 tbsp lemon juice (negligible calories/protein/fiber)\n    *   *Total Estimated Calories: 400*\n    *   *Total Estimated Protein: 26g*\n    *   *Total Estimated Fiber: 7g*\n\n**Dinner:**\n*   **Baked Cod with Roasted Asparagus and Quinoa**\n    *   6 oz cod fillet (approx. 180 calories, 36g protein)\n    *   1 cup asparagus (approx. 40 calories, 4g protein, 4g fiber)\n    *   1 tsp olive oil for roasting asparagus (approx. 40 calories)\n    *   1/2 cup cooked quinoa (approx. 110 calories, 4g protein, 3g fiber)\n    *   Lemon wedges and herbs for seasoning (negligible calories/protein/fiber)\n    *   *Total Estimated Calories: 370*\n    *   *Total Estimated Protein: 44g*\n    *   *Total Estimated Fiber: 7g*\n\n**Estimated Daily Totals:**\n*   **Calories:** Approximately 1180\n*   **Protein:** Approximately 88g\n*   **Fiber:** Approximately 16g\n\nPlease let me know if you'd like any adjustments or have other preferences!"
+  ],
+  "conversation_context": "User: I need a fresh pescatarian day—same targets as last time. No tuna, and please don’t rerun any dishes from this week.\nAgent: Here is a pescatarian meal plan for you, avoiding tuna and any previously suggested dishes:\n\n**Breakfast:**\n*   **Smoked Salmon and Cream Cheese Bagel Thin**\n    *   1 whole wheat bagel thin (approx. 110 calories, 4g protein, 2g fiber)\n    *   2 oz cream cheese (approx. 200 calories, 2g protein)\n    *   2 oz smoked salmon (approx. 100 calories, 12g protein)\n    *   *Total Estimated Calories: 410*\n    *   *Total Estimated Protein: 18g*\n    *   *Total Estimated Fiber: 2g*\n\n**Lunch:**\n*   **Shrimp and Avocado Salad**\n    *   4 oz cooked shrimp (approx. 120 calories, 24g protein)\n    *   1/2 medium avocado (approx. 160 calories, 2g protein, 7g fiber)\n    *   Mixed greens (negligible calories/protein/fiber)\n    *   1 tbsp olive oil (approx. 120 calories)\n    *   1 tbsp lemon juice (negligible calories/protein/fiber)\n    *   *Total Estimated Calories: 400*\n    *   *Total Estimated Protein: 26g*\n    *   *Total Estimated Fiber: 7g*\n\n**Dinner:**\n*   **Baked Cod with Roasted Asparagus and Quinoa**\n    *   6 oz cod fillet (approx. 180 calories, 36g protein)\n    *   1 cup asparagus (approx. 40 calories, 4g protein, 4g fiber)\n    *   1 tsp olive oil for roasting asparagus (approx. 40 calories)\n    *   1/2 cup cooked quinoa (approx. 110 calories, 4g protein, 3g fiber)\n    *   Lemon wedges and herbs for seasoning (negligible calories/protein/fiber)\n    *   *Total Estimated Calories: 370*\n    *   *Total Estimated Protein: 44g*\n    *   *Total Estimated Fiber: 7g*\n\n**Estimated Daily Totals:**\n*   **Calories:** Approximately 1180\n*   **Protein:** Approximately 88g\n*   **Fiber:** Approximately 16g\n\nPlease let me know if you'd like any adjustments or have other preferences!\n",
+  "passed": false,
+  "nutrition_valid": false,
+  "nutrition_numbers": {
+    "kcal": 410.0,
+    "protein_g": 18.0,
+    "fiber_g": 2.0
+  },
+  "user_requirements": {
+    "pescatarian": false,
+    "no_tuna": false,
+    "us_units": true,
+    "japanese_thai": false
+  },
+  "user_req_score": 0.25,
+  "context_dependencies": {
+    "inter_session_recall": true,
+    "ambiguous_handling": true,
+    "variety_awareness": false
+  },
+  "context_score": 0.6666666666666666,
+  "tool_usage_valid": false,
+  "ground_truth": {
+    "final_answer_criteria": "Total 2090–2310 kcal; protein ≥130 g; pescatarian; excludes tuna; no repeats vs. menu_history.",
+    "must_use": [
+      "calculator day total",
+      "search for any new seafood or packaged item nutrition used"
+    ],
+    "must_not": [
+      "tuna",
+      "repeat exact dishes"
+    ]
+  },
+  "memory_dependencies": {
+    "intra_session": [
+      "pescatarian",
+      "no tuna"
+    ],
+    "inter_session": [
+      "from u04_s1_med_day (bench_009): 2200 kcal target, protein ≥130 g, fiber ≥30 g, Japanese/Thai preference",
+      "menu_history of last 3 days"
+    ]
+  },
+  "length": "short",
+  "total_turns": 2,
+  "evaluation_timestamp": "2025-12-07T11:26:15.213543",
+  "latency_total": 11.288497584999732,
+  "input_tokens_total": 828,
+  "output_tokens_total": 239,
+  "advanced_scores": {
+    "no_repeats": true,
+    "protein_rotation": true,
+    "fasting_window": true,
+    "netcarb_caps": true,
+    "sodium": true,
+    "tool_usage": false,
+    "ingredient_diversity": true,
+    "enhanced_nutrition": false
+  },
+  "advanced_score": 0.75,
+  "no_repeats_valid": true,
+  "protein_rotation_valid": true,
+  "fasting_window_valid": true,
+  "netcarb_caps_valid": true,
+  "sodium_valid": true,
+  "ingredient_diversity_valid": true,
+  "enhanced_nutrition_valid": false,
+  "meal_times": [],
+  "proposed_dishes": [
+    "Breakfast:",
+    "Smoked Salmon and Cream Cheese Bagel Thin",
+    "Lunch:",
+    "Shrimp and Avocado Salad",
+    "Dinner:",
+    "Baked Cod with Roasted Asparagus and Quinoa",
+    "Estimated Daily Totals:",
+    "Calories:",
+    "Protein:",
+    "Fiber:"
+  ],
+  "primary_proteins": [
+    "salmon",
+    "tuna",
+    "cod",
+    "shrimp",
+    "cheese"
+  ],
+  "ingredients": [
+    "olive oil",
+    "olive oil",
+    "Cream Cheese",
+    "cream cheese",
+    "and herbs"
+  ],
+  "netcarbs_by_meal": {},
+  "sodium_content": 0.0,
+  "tools_used": [
+    "search"
+  ]
+}

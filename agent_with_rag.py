@@ -9,6 +9,18 @@ from rag_system import RAGSystem, EnhancedMemoryManager
 from tavily import TavilyClient
 
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+import datetime
+import time  # ✅ 新增：用来计时
+from agent import get_agent_message, Agent, GeminiClient, OpenRouterClient, RateLimiter, SimpleLogger
+from memory_manager import HybridMemoryManager
+from rag_system import RAGSystem, EnhancedMemoryManager
+from tavily import TavilyClient
+
+
 def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.datetime,
                                memory_manager=None, rag_system=None, return_metadata: bool = False):
     user_log_path = os.path.join("logs", f"{username}.log")
@@ -28,6 +40,7 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
         )
     else:
         api_key = os.getenv("GEMINI_API_KEY")
+        # ⚠️ 你也可以改成用 MODEL_NAME，这里先保持原逻辑：
         model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
         llm_client = GeminiClient(
             api_key=api_key,
@@ -72,9 +85,46 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
             ) if memory_manager else None
 
     try:
+        t0 = time.perf_counter()
         result = agent.chat_with_tools(inquiry, max_steps=5, ts_start=timestamp, user_context=user_context)
+        latency = time.perf_counter() - t0  # ✅ 单次调用耗时（秒）
+
         answer = result["response"]
-        tools_used = result["tools_used"]
+        tools_used = result.get("tools_used", [])
+
+        raw_usage = result.get("usage") or result.get("token_usage") or {}
+        input_tokens = (
+            raw_usage.get("input_tokens")
+            or raw_usage.get("prompt_tokens")
+            or raw_usage.get("input", 0)
+            or 0
+        )
+        output_tokens = (
+            raw_usage.get("output_tokens")
+            or raw_usage.get("completion_tokens")
+            or raw_usage.get("output", 0)
+            or 0
+        )
+        # 保证是 int
+        try:
+            input_tokens = int(input_tokens)
+        except Exception:
+            input_tokens = 0
+        try:
+            output_tokens = int(output_tokens)
+        except Exception:
+            output_tokens = 0
+
+        usage = {
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+        }
+
+        logger.log(
+            f"[metrics] latency={latency:.3f}s, tokens(in={input_tokens}, out={output_tokens})",
+            ts=timestamp
+        )
+
         logger.log(f"[final] answer(len={len(answer)}): {answer[:500]}", ts=timestamp)
         logger.log(f"[tools] used: {tools_used}")
 
@@ -120,15 +170,26 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
                 logger.log(f"[warning] Failed to save conversation: {repr(e)}")
 
         if return_metadata:
-            return {"response": answer, "tools_used": tools_used}
+            return {
+                "response": answer,
+                "tools_used": tools_used,
+                "latency": latency,
+                "usage": usage,
+            }
         return answer
 
     except Exception as e:
         logger.log(f"[error] {repr(e)}", ts=timestamp)
         error_response = "Sorry, something went wrong while generating the response."
         if return_metadata:
-            return {"response": error_response, "tools_used": []}
+            return {
+                "response": error_response,
+                "tools_used": [],
+                "latency": 0.0,
+                "usage": {"input_tokens": 0, "output_tokens": 0},
+            }
         return error_response
+
 
 
 def main():

@@ -12,7 +12,6 @@ data/
 *.sqlite3
 logs/
 *.log
-evaluation_results/
 evaluation_logs/
 .vscode/
 .idea/

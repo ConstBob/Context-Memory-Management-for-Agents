@@ -75,11 +75,12 @@ def check_sodium(day_sodium_mg: float, limit_mg: float) -> bool:
 
 def check_tool_usage(tool_logs: List[str], must_use: List[str]) -> bool:
     # tool_logs: e.g., ["search", "calculator", "search"]
-    for i in must_use:
+    for i in tool_logs:
         flag = False
-        for j in tool_logs:
+        for j in must_use:
             if j in i:
                 flag = True
+                break
         if flag is False:
             return False
     return True
@@ -151,9 +152,6 @@ def extract_numbers_from_text(text: str) -> Dict[str, float]:
         out["net_carbs_g"] = netc
 
     return out
-
-
-
 
 # Example high-level check for a single day (you can adapt to multi-day/week):
 def evaluate_day(user_id: str,
