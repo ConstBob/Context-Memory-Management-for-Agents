@@ -224,7 +224,30 @@ Amazon Lightsail Ubuntu 24.04 TLS
 - Context weakness identification
 - Trend analysis across conversation types
 
-## Contributors
-Zihao Wang, Ye Tian, Yiming Zhao, Hengzhou Li, Ziqiao Xi
+## Experimental Results
 
-University of California, San Diego December 9, 2025
+We evaluated the system on a benchmark of 15 multi-turn diet-planning tasks, comparing the Phase 1 Baseline (stateless) against the Phase 2 Final System (Memory + RAG).
+
+### Quality & Accuracy
+
+The enhanced agent achieved a **4x improvement** in task completion rate and significantly higher nutrition validity.
+
+| Metric | Baseline (Stateless) | Final (Memory + RAG) | Improvement |
+| :--- | :--- | :--- | :--- |
+| **Task Completion Rate** | 13.3% (2/15) | **53.3% (8/15)** | +40.0 pp |
+| **Nutrition Validity** | 0/15 Valid Plans | **8/15 Valid Plans** | +8 plans |
+| **User Consistency (u01)** | 25% | **100%** | +75 pp |
+
+### Efficiency & Latency
+
+While the memory overhead increases latency slightly, the system is significantly more efficient at producing *successful* plans.
+
+* **Latency:** Average latency increased by ~22% (20.8s → 25.5s) due to retrieval and verification overhead.
+* **Token Efficiency:** Tokens per *successful* plan dropped by **35%** (12.8k → 8.3k).
+* **Cost Implication:** The system is "expensive but worthwhile"—it spends more compute per interaction but wastes substantially less on plans that ultimately fail safety or nutrition requirements.
+
+## Contributors
+
+**Zihao Wang, Ye Tian, Yiming Zhao, Hengzhou Li, Ziqiao Xi**
+*University of California, San Diego*
+*December 9, 2025*
