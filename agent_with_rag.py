@@ -14,7 +14,7 @@ load_dotenv()
 
 import os
 import datetime
-import time  # ✅ 新增：用来计时
+import time
 from agent import get_agent_message, Agent, GeminiClient, OpenRouterClient, RateLimiter, SimpleLogger
 from memory_manager import HybridMemoryManager
 from rag_system import RAGSystem, EnhancedMemoryManager
@@ -40,7 +40,6 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
         )
     else:
         api_key = os.getenv("GEMINI_API_KEY")
-        # ⚠️ 你也可以改成用 MODEL_NAME，这里先保持原逻辑：
         model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
         llm_client = GeminiClient(
             api_key=api_key,
@@ -87,7 +86,7 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
     try:
         t0 = time.perf_counter()
         result = agent.chat_with_tools(inquiry, max_steps=5, ts_start=timestamp, user_context=user_context)
-        latency = time.perf_counter() - t0  # ✅ 单次调用耗时（秒）
+        latency = time.perf_counter() - t0
 
         answer = result["response"]
         tools_used = result.get("tools_used", [])
@@ -105,7 +104,6 @@ def get_agent_message_with_rag(username: str, inquiry: str, timestamp: datetime.
             or raw_usage.get("output", 0)
             or 0
         )
-        # 保证是 int
         try:
             input_tokens = int(input_tokens)
         except Exception:

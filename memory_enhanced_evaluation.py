@@ -300,7 +300,7 @@ class MemoryEnhancedEvaluator:
                     latency = result.get("latency", 0.0)
                     usage = result.get("usage", {}) or result.get("token_usage", {})
 
-                    # 这里假设 usage = {"input_tokens": ..., "output_tokens": ...}
+                    # usage = {"input_tokens": ..., "output_tokens": ...}
                     total_latency += latency
                     total_input_tokens += usage.get("input_tokens", 0)
                     total_output_tokens += usage.get("output_tokens", 0)
@@ -519,25 +519,18 @@ class MemoryEnhancedEvaluator:
             }
             
     def _parse_macro_criteria(self, criteria_text: str):
-        """
-        从 ground_truth['final_answer_criteria'] 里解析：
-        - 是否是整日 Total
-        - kcal 区间
-        - protein 最小值
-        - fiber 最小值
-        """
         import re
 
         s = (criteria_text or "").lower()
         macros = {
-            "is_total": "total" in s,   # 包含 "Total 1710–1890 kcal" 之类
+            "is_total": "total" in s,   # Total 1710–1890 kcal
             "kcal_low": None,
             "kcal_high": None,
             "protein_min": None,
             "fiber_min": None,
         }
 
-        # 1) Total 1520–1680 kcal / Total 1710–1890 kcal 这类整日目标
+        # 1) 1520–1680 kcal / Total 1710–1890 kcal
         m_total = re.search(r"total\s+(\d{3,4})\s*[-–]\s*(\d{3,4})\s*kcal", s)
         if m_total:
             lo, hi = float(m_total.group(1)), float(m_total.group(2))
@@ -545,7 +538,7 @@ class MemoryEnhancedEvaluator:
                 lo, hi = hi, lo
             macros["kcal_low"], macros["kcal_high"] = lo, hi
         else:
-            # 2) 一般的区间，比如 "540–660 kcal"、"360–440 kcal"
+            # 2) "540–660 kcal"、"360–440 kcal"
             m = re.search(r"(\d{3,4})\s*[-–]\s*(\d{3,4})\s*kcal", s)
             if m:
                 lo, hi = float(m.group(1)), float(m.group(2))
@@ -553,7 +546,7 @@ class MemoryEnhancedEvaluator:
                     lo, hi = hi, lo
                 macros["kcal_low"], macros["kcal_high"] = lo, hi
 
-        # 3) 只有一个 kcal 数字，例如 "around 300 kcal"
+        # 3) kcal "around 300 kcal"
         if macros["kcal_low"] is None and macros["kcal_high"] is None:
             m1 = re.search(r"(\d{3,4})\s*(?:kcal|cal|cals)", s)
             if m1:

@@ -280,10 +280,8 @@ If tool outputs are provided, use them to give accurate, verified answers."""
         text = self.gemini_client.infer(prompt)
 
         if not return_usage:
-            # 原来的行为：只返回文本
             return text
 
-        # -------- 新增：统计 input / output “token” 数（按单词分） --------
         total_input_str = (prompt.get('system') or '') + "\n" + (prompt.get('user') or '')
         input_tokens = len(total_input_str.split())
         output_tokens = len((text or "").split())
@@ -322,7 +320,6 @@ If tool outputs are provided, use them to give accurate, verified answers."""
                 continue
             break
 
-        # ✅ 调用 generate_response 时，让它返回 usage
         response, usage = self.generate_response(
             question,
             tool_history=history,
@@ -332,7 +329,6 @@ If tool outputs are provided, use them to give accurate, verified answers."""
 
         tools_used = list(set([h["tool"] for h in history]))
 
-        # 这里把 usage 一起返回，外层就能看到 input_tokens / output_tokens
         return {
             "response": response,
             "tools_used": tools_used,
@@ -418,7 +414,6 @@ def get_agent_message(
             or 0
         )
 
-        # 保证是 int
         try:
             input_tokens = int(input_tokens)
         except Exception:
