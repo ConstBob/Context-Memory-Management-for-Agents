@@ -223,3 +223,8 @@ Amazon Lightsail Ubuntu 24.04 TLS
 - User-specific requirement tracking
 - Context weakness identification
 - Trend analysis across conversation types
+
+## Contributors
+Zihao Wang, Ye Tian, Yiming Zhao, Hengzhou Li, Ziqiao Xi
+
+University of California, San Diego December 9, 2025
