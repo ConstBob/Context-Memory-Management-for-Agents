@@ -11,7 +11,7 @@ A comprehensive framework with context and memory management capabilities in AI 
 │                                                                 │
 │  ┌─────────────────┐    ┌─────────────────┐    ┌──────────────┐ │
 │  │   Discord Bot   │    │   Core Agent    │    │  Evaluation  │ │
-│  │   (discordBot)  │    │    (agent.py)   │    │  Framework   │ │
+│  │   (discordBot)  │    │(agent w/ rag.py)│    │  Framework   │ │
 │  │                 │    │                 │    │              │ │
 │  │ • User Input    │───►│ • GeminiClient  │◄───│ • Baseline   │ │
 │  │ • Mention       │    │ • Calculator    │    │   Evaluation │ │
